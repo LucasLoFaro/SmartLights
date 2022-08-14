@@ -1,0 +1,1460 @@
+{
+	"info": {
+		"_postman_id": "4ed665c9-1d46-4b91-98ef-9718f0668383",
+		"name": "SmartLightsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "/api/Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"ID\": \"sunt sit irure culpa\",\n    \"Name\": \"Excepteur amet\",\n    \"Role\": 1,\n    \"LastLogin\": \"1978-03-10T00:12:42.397Z\"\n  },\n  {\n    \"ID\": \"ut nostrud\",\n    \"Name\": \"nisi velit\",\n    \"Role\": 1,\n    \"LastLogin\": \"1956-05-05T01:50:21.473Z\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "/api/Users/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f870587604b1ac88a56431",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "mollit incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"ID\": \"Excepteur deserunt consequat in\",\n  \"Name\": \"tempor dolore et\",\n  \"Role\": 1,\n  \"LastLogin\": \"1956-07-16T03:18:18.860Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Lucas\",\n  \"Role\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"Excepteur deserunt consequat in\",\n  \"Name\": \"tempor dolore et\",\n  \"Role\": 1,\n  \"LastLogin\": \"1956-07-16T03:18:18.860Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Users",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Users/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Lucas\",\n  \"Role\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f870887604b1ac88a56432",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"Excepteur deserunt consequat in\",\n  \"Name\": \"tempor dolore et\",\n  \"Role\": 1,\n  \"LastLogin\": \"1956-07-16T03:18:18.860Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "mollit incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Users/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f870587604b1ac88a56431",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Users/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "mollit incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Roads",
+			"item": [
+				{
+					"name": "/api/Roads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Roads",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Roads"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Roads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Roads"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"name\": \"dolor irure\",\n    \"type\": 0,\n    \"lanesQuantity\": 22985049,\n    \"direction\": 4,\n    \"maxSpeed\": 83454317,\n    \"idealSpeed\": 65212620,\n    \"syncTimeReference\": {\n      \"ticks\": -26947619,\n      \"days\": 35990529,\n      \"hours\": -89371842,\n      \"milliseconds\": -21487174,\n      \"minutes\": -45646169,\n      \"seconds\": 5323747,\n      \"totalDays\": -53598249.12075153,\n      \"totalHours\": 17865911.73953758,\n      \"totalMilliseconds\": -78363988.04577395,\n      \"totalMinutes\": 68618341.75501603,\n      \"totalSeconds\": 14699021.974815756\n    }\n  },\n  {\n    \"name\": \"ut officia laborum cillum\",\n    \"type\": 0,\n    \"lanesQuantity\": -12879997,\n    \"direction\": 0,\n    \"maxSpeed\": -54982492,\n    \"idealSpeed\": 98868721,\n    \"syncTimeReference\": {\n      \"ticks\": -37912622,\n      \"days\": -23241569,\n      \"hours\": 89033523,\n      \"milliseconds\": -25079970,\n      \"minutes\": 43636367,\n      \"seconds\": -83532988,\n      \"totalDays\": -5047421.100665778,\n      \"totalHours\": 8193862.458592966,\n      \"totalMilliseconds\": -8143825.925070971,\n      \"totalMinutes\": -83529535.03663497,\n      \"totalSeconds\": -4130590.686254099\n    }\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "/api/Roads/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/Roads/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Roads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "dolore incididunt",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Roads/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Roads",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolore incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"name\": \"labore\",\n  \"type\": 0,\n  \"lanesQuantity\": 2386102,\n  \"direction\": 3,\n  \"maxSpeed\": -93886915,\n  \"idealSpeed\": 91776771,\n  \"syncTimeReference\": {\n    \"ticks\": -20093360,\n    \"days\": -17856179,\n    \"hours\": 72487240,\n    \"milliseconds\": 75410542,\n    \"minutes\": -17958421,\n    \"seconds\": -29785079,\n    \"totalDays\": 47351865.501541525,\n    \"totalHours\": 93865022.69137716,\n    \"totalMilliseconds\": 28860966.4499266,\n    \"totalMinutes\": 9575431.641651064,\n    \"totalSeconds\": -68800753.52541603\n  }\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/Roads",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Olleros\",\n  \"type\": 1,\n  \"lanesQuantity\": 2,\n  \"direction\": 3,\n  \"maxSpeed\": 40,\n  \"idealSpeed\": 33\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Roads",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Roads"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"q\",\n  \"type\": 0,\n  \"lanesQuantity\": 10202939,\n  \"direction\": 2,\n  \"maxSpeed\": 28285376,\n  \"idealSpeed\": -211955,\n  \"syncTimeReference\": {\n    \"ticks\": -89163003,\n    \"days\": -9015908,\n    \"hours\": 44308267,\n    \"milliseconds\": 16473414,\n    \"minutes\": 58716001,\n    \"seconds\": 73517423\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Roads",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Roads"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Roads/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"q\",\n  \"type\": 0,\n  \"lanesQuantity\": 10202939,\n  \"direction\": 2,\n  \"maxSpeed\": 28285376,\n  \"idealSpeed\": -211955,\n  \"syncTimeReference\": {\n    \"ticks\": -89163003,\n    \"days\": -9015908,\n    \"hours\": 44308267,\n    \"milliseconds\": 16473414,\n    \"minutes\": 58716001,\n    \"seconds\": 73517423\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/Roads/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Roads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "dolore incididunt",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"q\",\n  \"type\": 0,\n  \"lanesQuantity\": 10202939,\n  \"direction\": 2,\n  \"maxSpeed\": 28285376,\n  \"idealSpeed\": -211955,\n  \"syncTimeReference\": {\n    \"ticks\": -89163003,\n    \"days\": -9015908,\n    \"hours\": 44308267,\n    \"milliseconds\": 16473414,\n    \"minutes\": 58716001,\n    \"seconds\": 73517423\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/Roads/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Roads",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolore incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/Roads/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/Roads/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"Roads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "dolore incididunt",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/Roads/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"Roads",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "dolore incididunt",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Traffic Lights",
+			"item": [
+				{
+					"name": "/api/TrafficLights",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficLights",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficLights"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficLights",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficLights"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"ID\": \"Excepteur m\",\n    \"Name\": \"aliquip dolore e\",\n    \"Status\": 1,\n    \"CurrentCongestion\": 2,\n    \"Latitude\": 88993573.84960246,\n    \"Longitude\": 30061629.857979,\n    \"CurrentStatus\": {\n      \"ID\": \"cillum cupidatat sunt\",\n      \"TrafficLightID\": 79445303,\n      \"Generated\": \"1977-06-08T01:45:12.241Z\",\n      \"RoadA_EW\": -32625597,\n      \"RoadA_WE\": 96226888,\n      \"RoadA_NS\": -7556154,\n      \"RoadA_SN\": 38102397\n    },\n    \"AverageValue\": {\n      \"ID\": \"ut sed\",\n      \"TrafficLightID\": -14604280,\n      \"Generated\": \"1980-03-26T23:49:40.688Z\",\n      \"RoadA_EW\": -78792605,\n      \"RoadA_WE\": 74381351,\n      \"RoadA_NS\": 20732648,\n      \"RoadA_SN\": 12378390\n    },\n    \"HistoricalData\": [\n      {\n        \"ID\": \"occaeca\",\n        \"TrafficLightID\": 41749067,\n        \"Generated\": \"1992-04-12T23:07:14.104Z\",\n        \"RoadA_EW\": -49408091,\n        \"RoadA_WE\": 22541703,\n        \"RoadA_NS\": -74062184,\n        \"RoadA_SN\": -46379648\n      },\n      {\n        \"ID\": \"in\",\n        \"TrafficLightID\": 52528949,\n        \"Generated\": \"1998-02-19T20:17:53.282Z\",\n        \"RoadA_EW\": -17286956,\n        \"RoadA_WE\": -20021204,\n        \"RoadA_NS\": -19748646,\n        \"RoadA_SN\": -73495857\n      }\n    ],\n    \"Configuration\": {\n      \"TotalTime\": {\n        \"Ticks\": -80618093,\n        \"Days\": -57918286,\n        \"Hours\": 52057131,\n        \"Milliseconds\": 52899803,\n        \"Minutes\": 43806709,\n        \"Seconds\": 66693604,\n        \"TotalDays\": -80197251.05694038,\n        \"TotalHours\": -79905138.25447634,\n        \"TotalMilliseconds\": 52007075.99881005,\n        \"TotalMinutes\": -81877875.88589254,\n        \"TotalSeconds\": -77883151.25627601\n      },\n      \"RoadAPriority\": -48944652.451325245,\n      \"RoadBPriority\": 66572648.91317549,\n      \"RoadSyncOffset\": {\n        \"Ticks\": 60504840,\n        \"Days\": 18397017,\n        \"Hours\": 2705344,\n        \"Milliseconds\": -44236676,\n        \"Minutes\": 69134711,\n        \"Seconds\": 84132065,\n        \"TotalDays\": -68117403.53066961,\n        \"TotalHours\": 77318184.6567272,\n        \"TotalMilliseconds\": 72171396.28561044,\n        \"TotalMinutes\": 85867779.81096515,\n        \"TotalSeconds\": 14425717.783346444\n      }\n    },\n    \"RoadA_ID\": 20740678,\n    \"RoadA\": {\n      \"ID\": \"ut id\",\n      \"Name\": \"ipsum ut mollit\",\n      \"Type\": 0,\n      \"LanesQuantity\": 44018561,\n      \"Direction\": 5,\n      \"MaxSpeed\": -42556488,\n      \"IdealSpeed\": 61733942,\n      \"SyncTimeReference\": {\n        \"Ticks\": -42727394,\n        \"Days\": -35223454,\n        \"Hours\": -68339352,\n        \"Milliseconds\": -96880939,\n        \"Minutes\": 2854309,\n        \"Seconds\": -82226261,\n        \"TotalDays\": 85630287.26077566,\n        \"TotalHours\": 66833252.712527215,\n        \"TotalMilliseconds\": 64586054.39024469,\n        \"TotalMinutes\": -42826795.13129879,\n        \"TotalSeconds\": -76328621.40041228\n      }\n    },\n    \"RoadB_ID\": -45634298,\n    \"RoadB\": {\n      \"ID\": \"exercitation fugiat ut\",\n      \"Name\": \"dolore non\",\n      \"Type\": 0,\n      \"LanesQuantity\": 62934037,\n      \"Direction\": 4,\n      \"MaxSpeed\": 38501790,\n      \"IdealSpeed\": -90661540,\n      \"SyncTimeReference\": {\n        \"Ticks\": -81386822,\n        \"Days\": 48347591,\n        \"Hours\": 79146487,\n        \"Milliseconds\": 15002164,\n        \"Minutes\": 26878900,\n        \"Seconds\": -33952430,\n        \"TotalDays\": -26951139.700256065,\n        \"TotalHours\": -28418314.384312063,\n        \"TotalMilliseconds\": -87238890.87719838,\n        \"TotalMinutes\": -37447852.20624971,\n        \"TotalSeconds\": 81924346.09518537\n      }\n    },\n    \"LastReport\": \"1988-03-11T06:37:08.969Z\",\n    \"LastModified\": \"1982-02-18T17:12:09.207Z\"\n  },\n  {\n    \"ID\": \"eiusmod ex\",\n    \"Name\": \"cillum\",\n    \"Status\": 0,\n    \"CurrentCongestion\": 3,\n    \"Latitude\": -65318785.69001197,\n    \"Longitude\": -32970962.31325893,\n    \"CurrentStatus\": {\n      \"ID\": \"sed sit culpa\",\n      \"TrafficLightID\": -34091541,\n      \"Generated\": \"1956-04-25T10:05:16.438Z\",\n      \"RoadA_EW\": -49615865,\n      \"RoadA_WE\": -18540250,\n      \"RoadA_NS\": -93000962,\n      \"RoadA_SN\": -1800175\n    },\n    \"AverageValue\": {\n      \"ID\": \"fugiat nulla\",\n      \"TrafficLightID\": -88508731,\n      \"Generated\": \"2009-01-02T00:00:21.510Z\",\n      \"RoadA_EW\": 98603709,\n      \"RoadA_WE\": -78693842,\n      \"RoadA_NS\": -40364493,\n      \"RoadA_SN\": -74892896\n    },\n    \"HistoricalData\": [\n      {\n        \"ID\": \"labore consequat\",\n        \"TrafficLightID\": -44100008,\n        \"Generated\": \"1967-01-04T20:36:09.946Z\",\n        \"RoadA_EW\": -3764301,\n        \"RoadA_WE\": 33729722,\n        \"RoadA_NS\": 95853574,\n        \"RoadA_SN\": 30576099\n      },\n      {\n        \"ID\": \"sit sed sunt ut\",\n        \"TrafficLightID\": 29294964,\n        \"Generated\": \"1999-10-25T01:32:14.806Z\",\n        \"RoadA_EW\": -93908842,\n        \"RoadA_WE\": -13794947,\n        \"RoadA_NS\": -94059909,\n        \"RoadA_SN\": -55354512\n      }\n    ],\n    \"Configuration\": {\n      \"TotalTime\": {\n        \"Ticks\": -40926297,\n        \"Days\": -50266836,\n        \"Hours\": 80532565,\n        \"Milliseconds\": 41022922,\n        \"Minutes\": 54093396,\n        \"Seconds\": 18837009,\n        \"TotalDays\": 77536432.82897946,\n        \"TotalHours\": 63838136.73877695,\n        \"TotalMilliseconds\": 63862476.21912488,\n        \"TotalMinutes\": 9813922.709541783,\n        \"TotalSeconds\": 84520737.43923828\n      },\n      \"RoadAPriority\": 10242587.669032633,\n      \"RoadBPriority\": 43973420.01781893,\n      \"RoadSyncOffset\": {\n        \"Ticks\": -79015266,\n        \"Days\": -44871601,\n        \"Hours\": 80198867,\n        \"Milliseconds\": 89959722,\n        \"Minutes\": 65732082,\n        \"Seconds\": 28401794,\n        \"TotalDays\": -6697033.594573393,\n        \"TotalHours\": 83258976.87692425,\n        \"TotalMilliseconds\": -47145653.391020216,\n        \"TotalMinutes\": -60842136.46406767,\n        \"TotalSeconds\": -69926090.05769874\n      }\n    },\n    \"RoadA_ID\": -58070142,\n    \"RoadA\": {\n      \"ID\": \"nulla dolore in nostrud\",\n      \"Name\": \"deserunt Duis\",\n      \"Type\": 1,\n      \"LanesQuantity\": 42307181,\n      \"Direction\": 2,\n      \"MaxSpeed\": -31485283,\n      \"IdealSpeed\": 29006948,\n      \"SyncTimeReference\": {\n        \"Ticks\": -73970449,\n        \"Days\": 60689370,\n        \"Hours\": -7380656,\n        \"Milliseconds\": 95317209,\n        \"Minutes\": 40811492,\n        \"Seconds\": 12631603,\n        \"TotalDays\": 63228504.01516789,\n        \"TotalHours\": 80816245.52763537,\n        \"TotalMilliseconds\": 91195259.81595987,\n        \"TotalMinutes\": 66885782.98676804,\n        \"TotalSeconds\": -50954939.76638261\n      }\n    },\n    \"RoadB_ID\": -76604450,\n    \"RoadB\": {\n      \"ID\": \"veniam anim officia\",\n      \"Name\": \"ea sint enim ut magna\",\n      \"Type\": 1,\n      \"LanesQuantity\": -25207707,\n      \"Direction\": 2,\n      \"MaxSpeed\": -45877319,\n      \"IdealSpeed\": -83939531,\n      \"SyncTimeReference\": {\n        \"Ticks\": 9997917,\n        \"Days\": 59141981,\n        \"Hours\": -12423136,\n        \"Milliseconds\": -59791389,\n        \"Minutes\": -88082838,\n        \"Seconds\": -88733035,\n        \"TotalDays\": -78677847.65224655,\n        \"TotalHours\": -24798437.604347616,\n        \"TotalMilliseconds\": 58243837.15916151,\n        \"TotalMinutes\": -31475224.679320276,\n        \"TotalSeconds\": 96273421.91390863\n      }\n    },\n    \"LastReport\": \"2001-03-10T23:53:17.708Z\",\n    \"LastModified\": \"2001-02-03T14:34:28.235Z\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficLights/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficLights/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficLights",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f874e8d55125227da25a0f",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficLights/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficLights",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "adipisicing",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"ID\": \"minim\",\n  \"Name\": \"et\",\n  \"Status\": 0,\n  \"CurrentCongestion\": 5,\n  \"Latitude\": 74494003.72049993,\n  \"Longitude\": -57387264.15937822,\n  \"CurrentStatus\": {\n    \"ID\": \"reprehenderit amet\",\n    \"TrafficLightID\": 24129687,\n    \"Generated\": \"1991-11-21T21:59:19.193Z\",\n    \"RoadA_EW\": -76197787,\n    \"RoadA_WE\": -45661367,\n    \"RoadA_NS\": -9894679,\n    \"RoadA_SN\": -5935101\n  },\n  \"AverageValue\": {\n    \"ID\": \"anim aute eu sunt dolor\",\n    \"TrafficLightID\": -97150497,\n    \"Generated\": \"1987-06-16T00:15:10.477Z\",\n    \"RoadA_EW\": -78690134,\n    \"RoadA_WE\": -80517211,\n    \"RoadA_NS\": -6898081,\n    \"RoadA_SN\": 47378586\n  },\n  \"HistoricalData\": [\n    {\n      \"ID\": \"consequat occaeca\",\n      \"TrafficLightID\": 71149731,\n      \"Generated\": \"1944-04-12T05:33:46.475Z\",\n      \"RoadA_EW\": -33784868,\n      \"RoadA_WE\": -4160142,\n      \"RoadA_NS\": -11846576,\n      \"RoadA_SN\": 31236099\n    },\n    {\n      \"ID\": \"enim veli\",\n      \"TrafficLightID\": 18885535,\n      \"Generated\": \"1983-01-13T17:00:34.398Z\",\n      \"RoadA_EW\": -20585607,\n      \"RoadA_WE\": -64921468,\n      \"RoadA_NS\": 1330782,\n      \"RoadA_SN\": 95207785\n    }\n  ],\n  \"Configuration\": {\n    \"TotalTime\": {\n      \"Ticks\": 99114523,\n      \"Days\": 35550449,\n      \"Hours\": -68657016,\n      \"Milliseconds\": 59976351,\n      \"Minutes\": 6165191,\n      \"Seconds\": -4077415,\n      \"TotalDays\": -99926075.79213697,\n      \"TotalHours\": 70084074.1088022,\n      \"TotalMilliseconds\": 57549646.352447,\n      \"TotalMinutes\": -32473322.08075306,\n      \"TotalSeconds\": -77307475.86623354\n    },\n    \"RoadAPriority\": -22358001.76828508,\n    \"RoadBPriority\": -52114659.05636796,\n    \"RoadSyncOffset\": {\n      \"Ticks\": 81457108,\n      \"Days\": 40306635,\n      \"Hours\": -96707951,\n      \"Milliseconds\": -2461887,\n      \"Minutes\": 87108458,\n      \"Seconds\": 68260831,\n      \"TotalDays\": -18173820.59500496,\n      \"TotalHours\": 18023750.012845248,\n      \"TotalMilliseconds\": 26784386.04492621,\n      \"TotalMinutes\": 12553556.74427645,\n      \"TotalSeconds\": -79982391.3715064\n    }\n  },\n  \"RoadA_ID\": -95869600,\n  \"RoadA\": {\n    \"ID\": \"in do non\",\n    \"Name\": \"est mollit dolor\",\n    \"Type\": 0,\n    \"LanesQuantity\": -89189306,\n    \"Direction\": 5,\n    \"MaxSpeed\": -69020222,\n    \"IdealSpeed\": -60212158,\n    \"SyncTimeReference\": {\n      \"Ticks\": -56250113,\n      \"Days\": -92478203,\n      \"Hours\": -36513309,\n      \"Milliseconds\": 77164906,\n      \"Minutes\": 75682993,\n      \"Seconds\": 49086091,\n      \"TotalDays\": 1488112.2996192276,\n      \"TotalHours\": -45719002.30292401,\n      \"TotalMilliseconds\": 30322685.011461377,\n      \"TotalMinutes\": -7968549.743839622,\n      \"TotalSeconds\": 54307976.72012067\n    }\n  },\n  \"RoadB_ID\": 56040486,\n  \"RoadB\": {\n    \"ID\": \"irure sint dolor\",\n    \"Name\": \"in nostrud sit exercitation do\",\n    \"Type\": 0,\n    \"LanesQuantity\": 2486997,\n    \"Direction\": 4,\n    \"MaxSpeed\": -7412163,\n    \"IdealSpeed\": -4043747,\n    \"SyncTimeReference\": {\n      \"Ticks\": 57641099,\n      \"Days\": 13389738,\n      \"Hours\": -97449275,\n      \"Milliseconds\": 16259827,\n      \"Minutes\": 11595593,\n      \"Seconds\": 41232811,\n      \"TotalDays\": -4662504.535194814,\n      \"TotalHours\": -80956160.50822465,\n      \"TotalMilliseconds\": -4172551.596602902,\n      \"TotalMinutes\": -85569724.28179224,\n      \"TotalSeconds\": -963173.8127943426\n    }\n  },\n  \"LastReport\": \"1992-08-29T06:10:30.205Z\",\n  \"LastModified\": \"1985-09-23T01:52:12.521Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficLights",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"Name\": \"Soldado y Olleros\",\n  \"Status\": 1,\n  \"CurrentCongestion\": 3,\n  \"Latitude\": -34.56521,\n  \"Longitude\": -58.4384375,\n  \"Configuration\": {\n    \"TotalTime\": \"00:01:20\",\n    \"RoadAPriority\": 0.6,\n    \"RoadBPriority\": 0.4,\n    \"RoadSyncOffset\": \"00:00:10\"\n  },\n  \"RoadAID\": \"62f86e2ebf1b5badeb69b984\",\n  \"RoadBID\": \"62f87189ca62b83dba5c2907\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficLights",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficLights"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"proident\",\n  \"Name\": \"tempor elit Excepteur dolor\",\n  \"Status\": 1,\n  \"CurrentCongestion\": 5,\n  \"Latitude\": -17406447.092834696,\n  \"Longitude\": 70446494.59292316,\n  \"CurrentStatus\": {\n    \"ID\": \"velit laborum eiusmod ad\",\n    \"TrafficLightID\": 80386211,\n    \"Generated\": \"2021-10-21T03:26:19.833Z\",\n    \"RoadA_EW\": -32889739,\n    \"RoadA_WE\": 19562717,\n    \"RoadA_NS\": 87229418,\n    \"RoadA_SN\": 19961259\n  },\n  \"AverageValue\": {\n    \"ID\": \"id officia anim deser\",\n    \"TrafficLightID\": 9357022,\n    \"Generated\": \"2010-08-22T12:03:02.440Z\",\n    \"RoadA_EW\": -69230374,\n    \"RoadA_WE\": -44626060,\n    \"RoadA_NS\": 22024063,\n    \"RoadA_SN\": 37592438\n  },\n  \"HistoricalData\": [\n    {\n      \"ID\": \"dolor fugiat in\",\n      \"TrafficLightID\": -53313967,\n      \"Generated\": \"1962-09-29T08:18:58.343Z\",\n      \"RoadA_EW\": 8874978,\n      \"RoadA_WE\": 10399771,\n      \"RoadA_NS\": -23986708,\n      \"RoadA_SN\": 33505756\n    },\n    {\n      \"ID\": \"proident\",\n      \"TrafficLightID\": -2943819,\n      \"Generated\": \"2006-06-24T20:34:26.604Z\",\n      \"RoadA_EW\": -6741506,\n      \"RoadA_WE\": 62544606,\n      \"RoadA_NS\": 91075033,\n      \"RoadA_SN\": 27060999\n    }\n  ],\n  \"Configuration\": {\n    \"TotalTime\": {\n      \"Ticks\": -82454368,\n      \"Days\": 49147856,\n      \"Hours\": -82348491,\n      \"Milliseconds\": 95193587,\n      \"Minutes\": 56462031,\n      \"Seconds\": 43019978\n    },\n    \"RoadAPriority\": -32512226.56935519,\n    \"RoadBPriority\": 59554572.5449349,\n    \"RoadSyncOffset\": {\n      \"Ticks\": -26737904,\n      \"Days\": 38781441,\n      \"Hours\": 27751105,\n      \"Milliseconds\": 89339481,\n      \"Minutes\": 58979821,\n      \"Seconds\": -79658580\n    }\n  },\n  \"RoadA_ID\": -88540615,\n  \"RoadA\": {\n    \"ID\": \"sint \",\n    \"Name\": \"Lorem eu sed incididunt dolore\",\n    \"Type\": 1,\n    \"LanesQuantity\": 50637641,\n    \"Direction\": 2,\n    \"MaxSpeed\": 43511982,\n    \"IdealSpeed\": 43268972,\n    \"SyncTimeReference\": {\n      \"Ticks\": -42746186,\n      \"Days\": 90105874,\n      \"Hours\": -58384967,\n      \"Milliseconds\": -25870982,\n      \"Minutes\": -15947946,\n      \"Seconds\": 55226424\n    }\n  },\n  \"RoadB_ID\": 98325920,\n  \"RoadB\": {\n    \"ID\": \"la\",\n    \"Name\": \"cupidatat irure\",\n    \"Type\": 0,\n    \"LanesQuantity\": 95657957,\n    \"Direction\": 3,\n    \"MaxSpeed\": -38662977,\n    \"IdealSpeed\": -57642837,\n    \"SyncTimeReference\": {\n      \"Ticks\": -40699121,\n      \"Days\": -35039084,\n      \"Hours\": 17240876,\n      \"Milliseconds\": 5719749,\n      \"Minutes\": -73857385,\n      \"Seconds\": 45444726\n    }\n  },\n  \"LastReport\": \"1944-12-04T09:05:59.508Z\",\n  \"LastModified\": \"2019-11-03T02:08:39.033Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficLights",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficLights"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficLights/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ID\": \"proident\",\n  \"Name\": \"tempor elit Excepteur dolor\",\n  \"Status\": 1,\n  \"CurrentCongestion\": 5,\n  \"Latitude\": -17406447.092834696,\n  \"Longitude\": 70446494.59292316,\n  \"CurrentStatus\": {\n    \"ID\": \"velit laborum eiusmod ad\",\n    \"TrafficLightID\": 80386211,\n    \"Generated\": \"2021-10-21T03:26:19.833Z\",\n    \"RoadA_EW\": -32889739,\n    \"RoadA_WE\": 19562717,\n    \"RoadA_NS\": 87229418,\n    \"RoadA_SN\": 19961259\n  },\n  \"AverageValue\": {\n    \"ID\": \"id officia anim deser\",\n    \"TrafficLightID\": 9357022,\n    \"Generated\": \"2010-08-22T12:03:02.440Z\",\n    \"RoadA_EW\": -69230374,\n    \"RoadA_WE\": -44626060,\n    \"RoadA_NS\": 22024063,\n    \"RoadA_SN\": 37592438\n  },\n  \"HistoricalData\": [\n    {\n      \"ID\": \"dolor fugiat in\",\n      \"TrafficLightID\": -53313967,\n      \"Generated\": \"1962-09-29T08:18:58.343Z\",\n      \"RoadA_EW\": 8874978,\n      \"RoadA_WE\": 10399771,\n      \"RoadA_NS\": -23986708,\n      \"RoadA_SN\": 33505756\n    },\n    {\n      \"ID\": \"proident\",\n      \"TrafficLightID\": -2943819,\n      \"Generated\": \"2006-06-24T20:34:26.604Z\",\n      \"RoadA_EW\": -6741506,\n      \"RoadA_WE\": 62544606,\n      \"RoadA_NS\": 91075033,\n      \"RoadA_SN\": 27060999\n    }\n  ],\n  \"Configuration\": {\n    \"TotalTime\": {\n      \"Ticks\": -82454368,\n      \"Days\": 49147856,\n      \"Hours\": -82348491,\n      \"Milliseconds\": 95193587,\n      \"Minutes\": 56462031,\n      \"Seconds\": 43019978\n    },\n    \"RoadAPriority\": -32512226.56935519,\n    \"RoadBPriority\": 59554572.5449349,\n    \"RoadSyncOffset\": {\n      \"Ticks\": -26737904,\n      \"Days\": 38781441,\n      \"Hours\": 27751105,\n      \"Milliseconds\": 89339481,\n      \"Minutes\": 58979821,\n      \"Seconds\": -79658580\n    }\n  },\n  \"RoadA_ID\": -88540615,\n  \"RoadA\": {\n    \"ID\": \"sint \",\n    \"Name\": \"Lorem eu sed incididunt dolore\",\n    \"Type\": 1,\n    \"LanesQuantity\": 50637641,\n    \"Direction\": 2,\n    \"MaxSpeed\": 43511982,\n    \"IdealSpeed\": 43268972,\n    \"SyncTimeReference\": {\n      \"Ticks\": -42746186,\n      \"Days\": 90105874,\n      \"Hours\": -58384967,\n      \"Milliseconds\": -25870982,\n      \"Minutes\": -15947946,\n      \"Seconds\": 55226424\n    }\n  },\n  \"RoadB_ID\": 98325920,\n  \"RoadB\": {\n    \"ID\": \"la\",\n    \"Name\": \"cupidatat irure\",\n    \"Type\": 0,\n    \"LanesQuantity\": 95657957,\n    \"Direction\": 3,\n    \"MaxSpeed\": -38662977,\n    \"IdealSpeed\": -57642837,\n    \"SyncTimeReference\": {\n      \"Ticks\": -40699121,\n      \"Days\": -35039084,\n      \"Hours\": 17240876,\n      \"Milliseconds\": 5719749,\n      \"Minutes\": -73857385,\n      \"Seconds\": 45444726\n    }\n  },\n  \"LastReport\": \"1944-12-04T09:05:59.508Z\",\n  \"LastModified\": \"2019-11-03T02:08:39.033Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficLights/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficLights",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "adipisicing",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"proident\",\n  \"Name\": \"tempor elit Excepteur dolor\",\n  \"Status\": 1,\n  \"CurrentCongestion\": 5,\n  \"Latitude\": -17406447.092834696,\n  \"Longitude\": 70446494.59292316,\n  \"CurrentStatus\": {\n    \"ID\": \"velit laborum eiusmod ad\",\n    \"TrafficLightID\": 80386211,\n    \"Generated\": \"2021-10-21T03:26:19.833Z\",\n    \"RoadA_EW\": -32889739,\n    \"RoadA_WE\": 19562717,\n    \"RoadA_NS\": 87229418,\n    \"RoadA_SN\": 19961259\n  },\n  \"AverageValue\": {\n    \"ID\": \"id officia anim deser\",\n    \"TrafficLightID\": 9357022,\n    \"Generated\": \"2010-08-22T12:03:02.440Z\",\n    \"RoadA_EW\": -69230374,\n    \"RoadA_WE\": -44626060,\n    \"RoadA_NS\": 22024063,\n    \"RoadA_SN\": 37592438\n  },\n  \"HistoricalData\": [\n    {\n      \"ID\": \"dolor fugiat in\",\n      \"TrafficLightID\": -53313967,\n      \"Generated\": \"1962-09-29T08:18:58.343Z\",\n      \"RoadA_EW\": 8874978,\n      \"RoadA_WE\": 10399771,\n      \"RoadA_NS\": -23986708,\n      \"RoadA_SN\": 33505756\n    },\n    {\n      \"ID\": \"proident\",\n      \"TrafficLightID\": -2943819,\n      \"Generated\": \"2006-06-24T20:34:26.604Z\",\n      \"RoadA_EW\": -6741506,\n      \"RoadA_WE\": 62544606,\n      \"RoadA_NS\": 91075033,\n      \"RoadA_SN\": 27060999\n    }\n  ],\n  \"Configuration\": {\n    \"TotalTime\": {\n      \"Ticks\": -82454368,\n      \"Days\": 49147856,\n      \"Hours\": -82348491,\n      \"Milliseconds\": 95193587,\n      \"Minutes\": 56462031,\n      \"Seconds\": 43019978\n    },\n    \"RoadAPriority\": -32512226.56935519,\n    \"RoadBPriority\": 59554572.5449349,\n    \"RoadSyncOffset\": {\n      \"Ticks\": -26737904,\n      \"Days\": 38781441,\n      \"Hours\": 27751105,\n      \"Milliseconds\": 89339481,\n      \"Minutes\": 58979821,\n      \"Seconds\": -79658580\n    }\n  },\n  \"RoadA_ID\": -88540615,\n  \"RoadA\": {\n    \"ID\": \"sint \",\n    \"Name\": \"Lorem eu sed incididunt dolore\",\n    \"Type\": 1,\n    \"LanesQuantity\": 50637641,\n    \"Direction\": 2,\n    \"MaxSpeed\": 43511982,\n    \"IdealSpeed\": 43268972,\n    \"SyncTimeReference\": {\n      \"Ticks\": -42746186,\n      \"Days\": 90105874,\n      \"Hours\": -58384967,\n      \"Milliseconds\": -25870982,\n      \"Minutes\": -15947946,\n      \"Seconds\": 55226424\n    }\n  },\n  \"RoadB_ID\": 98325920,\n  \"RoadB\": {\n    \"ID\": \"la\",\n    \"Name\": \"cupidatat irure\",\n    \"Type\": 0,\n    \"LanesQuantity\": 95657957,\n    \"Direction\": 3,\n    \"MaxSpeed\": -38662977,\n    \"IdealSpeed\": -57642837,\n    \"SyncTimeReference\": {\n      \"Ticks\": -40699121,\n      \"Days\": -35039084,\n      \"Hours\": 17240876,\n      \"Milliseconds\": 5719749,\n      \"Minutes\": -73857385,\n      \"Seconds\": 45444726\n    }\n  },\n  \"LastReport\": \"1944-12-04T09:05:59.508Z\",\n  \"LastModified\": \"2019-11-03T02:08:39.033Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficLights/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficLights",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "adipisicing",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficLights/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficLights/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficLights",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f87480f84e60b03fa56c2c",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficLights/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficLights",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "adipisicing",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Traffic Data",
+			"item": [
+				{
+					"name": "/api/TrafficData",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficData",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficData"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"ID\": \"ut cillum occaecat dolor\",\n    \"TrafficLightID\": 31243455,\n    \"Generated\": \"2022-07-05T12:25:41.215Z\",\n    \"RoadA_EW\": -32887706,\n    \"RoadA_WE\": 53077150,\n    \"RoadA_NS\": -68613322,\n    \"RoadA_SN\": 88763685\n  },\n  {\n    \"ID\": \"Ut dolore velit\",\n    \"TrafficLightID\": 77411773,\n    \"Generated\": \"1976-09-02T20:35:56.250Z\",\n    \"RoadA_EW\": -14746044,\n    \"RoadA_WE\": -13845896,\n    \"RoadA_NS\": -43936196,\n    \"RoadA_SN\": -57940829\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficData/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficData/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficData",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "62f876e74519b699139ce90e",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "aliqua ullamco ut mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"ID\": \"\",\n  \"TrafficLightID\": -20482251,\n  \"Generated\": \"2014-02-26T09:33:35.122Z\",\n  \"RoadA_EW\": -16587150,\n  \"RoadA_WE\": -74991111,\n  \"RoadA_NS\": -50287123,\n  \"RoadA_SN\": -26093896\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficData/TrafficLight/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficData/TrafficLight/:trafficLightID",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficData",
+								"TrafficLight",
+								":trafficLightID"
+							],
+							"variable": [
+								{
+									"key": "trafficLightID",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "aliqua ullamco ut mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"ID\": \"\",\n  \"TrafficLightID\": -20482251,\n  \"Generated\": \"2014-02-26T09:33:35.122Z\",\n  \"RoadA_EW\": -16587150,\n  \"RoadA_WE\": -74991111,\n  \"RoadA_NS\": -50287123,\n  \"RoadA_SN\": -26093896\n}"
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficData",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"TrafficLightID\": \"62f874e8d55125227da25a0f\",\n  \"RoadA_EW\": 0,\n  \"RoadA_WE\": 7,\n  \"RoadA_NS\": 2,\n  \"RoadA_SN\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficData",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficData"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"\",\n  \"TrafficLightID\": -20482251,\n  \"Generated\": \"2014-02-26T09:33:35.122Z\",\n  \"RoadA_EW\": -16587150,\n  \"RoadA_WE\": -74991111,\n  \"RoadA_NS\": -50287123,\n  \"RoadA_SN\": -26093896\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficData/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"ID\": \"\",\n  \"TrafficLightID\": -20482251,\n  \"Generated\": \"2014-02-26T09:33:35.122Z\",\n  \"RoadA_EW\": -16587150,\n  \"RoadA_WE\": -74991111,\n  \"RoadA_NS\": -50287123,\n  \"RoadA_SN\": -26093896\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficDatas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "aliqua ullamco ut mollit",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"ID\": \"\",\n  \"TrafficLightID\": -20482251,\n  \"Generated\": \"2014-02-26T09:33:35.122Z\",\n  \"RoadA_EW\": -16587150,\n  \"RoadA_WE\": -74991111,\n  \"RoadA_NS\": -50287123,\n  \"RoadA_SN\": -26093896\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "aliqua ullamco ut mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/api/TrafficData/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"TrafficDatas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "aliqua ullamco ut mollit",
+									"description": "(Required) "
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/TrafficDatas/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"TrafficDatas",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "aliqua ullamco ut mollit",
+											"description": "(Required) "
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	]
+}

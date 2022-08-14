@@ -6,18 +6,21 @@ using MongoDB.Bson.Serialization.IdGenerators;
 
 namespace Business.Models
 {
-    public class TrafficData
+    public class User
     {
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonId]
         public String? ID { get; set; }
-        public String TrafficLightID { get; set; }
-        public DateTime Generated { get; set; } =DateTime.Now;
-        public int RoadA_EW { get; set; }
-        public int RoadA_WE { get; set; }
-        public int RoadA_NS { get; set; }
-        public int RoadA_SN { get; set; }
+        public String Name { get; set; }
+        public UserRole Role { get; set; }
+        public DateTime? LastLogin { get; set; } = DateTime.Now;
+        public List<Object>? ActionsTaken { get; set; }
         
-    }
+    }    
 
+    public enum UserRole
+    {
+        Admin,
+        User
+    }
 }
