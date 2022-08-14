@@ -1,24 +1,32 @@
-﻿namespace Business.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+
+namespace Business.Models
 {
     public class TrafficLight
     {
-        public int ID { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonId]
+        public String? ID { get; set; }
         public String Name { get; set; }
         public LightStatus Status { get; set; }
         public TrafficCongestion CurrentCongestion { get; set; }
         public Double Latitude { get; set; }
         public Double Longitude { get; set; }
-        public TrafficData CurrentStatus { get; set; }
-        public TrafficData AverageValue { get; set; }
+        public TrafficData? CurrentStatus { get; set; }
+        public TrafficData? AverageValue { get; set; }
         public List<TrafficData>? HistoricalData { get; set; }
         public LightConfiguration Configuration { get; set; }
-        public int RoadA_ID { get; set; }
+        public String RoadAID { get; set; }
         public Road? RoadA { get; set; }
-        public int RoadB_ID { get; set; }
+        public String RoadBID { get; set; }
         public Road? RoadB { get; set; }
-        public DateTime LastReport { get; set; }
-        public DateTime LastModified { get; set; }
-        
+        public DateTime LastReport { get; set; } = DateTime.Now;
+        public DateTime LastModified { get; set; } = DateTime.Now;
+
     }
     public enum LightStatus
     {
