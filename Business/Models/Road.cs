@@ -1,8 +1,16 @@
-﻿namespace Business.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+
+namespace Business.Models
 {
     public class Road
     {
-        public int ID { get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonId]
+        public String? ID { get; set; }
         public String Name { get; set; }
         public RoadType Type { get; set; }
         public int LanesQuantity { get; set; }
