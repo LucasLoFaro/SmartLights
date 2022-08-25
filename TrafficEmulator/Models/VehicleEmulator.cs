@@ -12,7 +12,6 @@ namespace TrafficEmulator.Models
         public Double Speed { get; set; }
         public VehicleStatus Status { get; set; }
         public Direction Direction { get; set; }
-        public int LaneNumber { get; set; }
         public int RoadID { get; set; }
     }
     public enum VehicleStatus
