@@ -1,10 +1,70 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "SmartLights";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div id="map"></div>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly"
+    defer
+></script>
+<script type="text/javascript">
+
+    // Initialize and add the map
+    function initMap() {
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 18,
+        center: { lat: -34.56521, lng: -58.4384375 },
+      });
+
+      
+      //Adding traffic layer
+      const trafficLayer = new google.maps.TrafficLayer();
+      trafficLayer.setMap(map)
+
+      //Drawing road traffic line
+      const line = [
+        { lat: -34.56521, lng: -58.4384375 },
+        { lat: -34.5660928, lng: -58.4394083}
+      ];
+      const lines = new google.maps.Polyline({
+        path: line,
+        geodesic: true,
+        strokeColor: "#FFDD00",
+        strokeOpacity: .7,
+        strokeWeight: 6,
+      });
+      lines.setMap(map);
+
+      //Drawing circle on traffic light
+      const cityCircle = new google.maps.Circle({
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.5,
+        strokeWeight: 0.5,
+        fillColor: "#FF0000",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: -34.56521, lng: -58.4384000 },
+        radius: 14,
+      });
+
+      // Drawing marker
+      const markerPosition = { lat: -34.566, lng: -58.438};
+      
+      const marker = new google.maps.Marker({
+        position: markerPosition,
+        map: map,
+      });
+    
+
+      window.initMap = initMap;
+
+
+      
+
+      
+    }
+</script>
+

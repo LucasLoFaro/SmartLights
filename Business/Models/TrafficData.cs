@@ -15,8 +15,8 @@ namespace Business.Models
         public DateTime Generated { get; set; } =DateTime.Now;
         public int RoadA_EW { get; set; }
         public int RoadA_WE { get; set; }
-        public int RoadA_NS { get; set; }
-        public int RoadA_SN { get; set; }
+        public int RoadB_NS { get; set; }
+        public int RoadB_SN { get; set; }
         
     }
 
