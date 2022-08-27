@@ -11,6 +11,7 @@
 ></script>
 <script type="text/javascript">
 
+
     // Initialize and add the map
     function initMap() {
       // The map, centered at Uluru
@@ -18,8 +19,7 @@
         zoom: 18,
         center: { lat: -34.56521, lng: -58.4384375 },
       });
-
-      
+            
       //Adding traffic layer
       const trafficLayer = new google.maps.TrafficLayer();
       trafficLayer.setMap(map)
@@ -38,18 +38,23 @@
       });
       lines.setMap(map);
 
-      //Drawing circle on traffic light
-      const cityCircle = new google.maps.Circle({
-        strokeColor: "#FF0000",
-        strokeOpacity: 0.5,
-        strokeWeight: 0.5,
-        fillColor: "#FF0000",
-        fillOpacity: 0.35,
-        map,
-        center: { lat: -34.56521, lng: -58.4384000 },
-        radius: 14,
+      $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+        var circles = [];
+        $.each( data, function( key, val ) {
+            circles.push(new google.maps.Circle({
+                strokeColor: "#FFFF00",
+                strokeOpacity: 0.5,
+                strokeWeight: 0.5,
+                fillColor: "#FFFF00",
+                fillOpacity: 0.35,
+                map,
+                center: { lat: val.Latitude, lng: val.Longitude },
+                radius: 10,
+            }));
+        });
       });
-      
+
       window.initMap = initMap;
     }
+    
 </script>

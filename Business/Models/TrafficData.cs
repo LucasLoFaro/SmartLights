@@ -13,6 +13,8 @@ namespace Business.Models
         public String? ID { get; set; }
         public String TrafficLightID { get; set; }
         public String TrafficLightName { get; set; }
+        public Double Latitude { get; set; }
+        public Double Longitude { get; set; }
         public DateTime Generated { get; set; } = DateTime.Now;
         public int RoadA_EW { get; set; }
         public int RoadA_WE { get; set; }

@@ -33,6 +33,8 @@ for (int i = 0; i < Lights.Count; i++)
     dataset.Add(new TrafficData());
     dataset[i].TrafficLightName = Lights[i].Name;
     dataset[i].TrafficLightID = Lights[i].ID;
+    dataset[i].Latitude = Lights[i].Latitude;
+    dataset[i].Longitude = Lights[i].Longitude;
 }
 
 const int LIGHTS_INTERVAL = 3000;
@@ -43,6 +45,8 @@ for (int i = 0; i < Lights.Count; i++)
 {
     dataset[i].TrafficLightName = Lights[i].Name;
     dataset[i].TrafficLightID = Lights[i].ID;
+    dataset[i].Latitude = Lights[i].Latitude;
+    dataset[i].Longitude = Lights[i].Longitude;
 
     //Add cars qty in corresponding road and direction counter
     switch (direction)
@@ -109,6 +113,8 @@ void TimerCallback(Object o)
         dataset.Add(new TrafficData());
         dataset[i].TrafficLightName = Lights[i].Name;
         dataset[i].TrafficLightID = Lights[i].ID;
+        dataset[i].Latitude = Lights[i].Latitude;
+        dataset[i].Longitude = Lights[i].Longitude;
     }
 }
 
