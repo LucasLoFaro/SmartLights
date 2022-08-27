@@ -17,9 +17,34 @@ TrafficDataService _TrafficDataService = new TrafficDataService();
 
 
 //Set Road, direction and how many cars as input.
-String roadID = "62f87189ca62b83dba5c2907";
-RoadDirection direction = RoadDirection.WestToEast;
-int carCount = 10;
+//String roadID = "62f87189ca62b83dba5c2907";
+String roadID = Environment.GetCommandLineArgs()[1];
+
+//RoadDirection direction = RoadDirection.WestToEast;
+RoadDirection direction;
+
+switch (Environment.GetCommandLineArgs()[2])
+{
+    case "WE":
+        direction = RoadDirection.WestToEast;
+        break;
+    case "EW":
+        direction = RoadDirection.EastToWest;
+        break;
+    case "NS":
+        direction = RoadDirection.NorthToSouth;
+        break;
+    case "SN":
+        direction = RoadDirection.SouthToNorth;
+        break;
+    default:
+        direction = RoadDirection.WestToEast;
+        break;
+}
+
+//int carCount = 10;
+int carCount = Convert.ToInt32(Environment.GetCommandLineArgs()[3]);
+
 //int speed = 30;
 
 //Get traffic lights in order
