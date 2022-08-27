@@ -9,20 +9,19 @@ public class TrafficDataService
 {
     private readonly IMongoCollection<TrafficData> _TrafficData;
 
-    public TrafficDataService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public TrafficDataService()
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.Database);
+        var mongoClient = new MongoClient("mongodb+srv://admin:admin@smartlights.0tdmts4.mongodb.net/?retryWrites=true&w=majority");
+        var mongoDatabase = mongoClient.GetDatabase("SmartLights");
 
         _TrafficData = mongoDatabase.GetCollection<TrafficData>("TrafficData");
     }
 
     public async Task<List<TrafficData>> GetAsync() =>
         await _TrafficData.Find(_ => true).ToListAsync();
+
+    public async Task<List<TrafficData>> GetLastSecondsAsync(int seconds) =>
+        await _TrafficData.Find(x => x.Generated > DateTime.Now.AddSeconds(-seconds)).ToListAsync();
 
     public async Task<TrafficData?> GetAsync(String id) =>
         await _TrafficData.Find(x => x.ID == id).FirstOrDefaultAsync();

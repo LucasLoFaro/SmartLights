@@ -23,6 +23,13 @@ namespace TrafficControllerAPI.Controllers
             return await _TrafficDataService.GetAsync();
         }
 
+        // GET: api/<TrafficDataController/Last/5>
+        [HttpGet("Last/{seconds}")]
+        public async Task<List<TrafficData>> GetLastSeconds(int seconds)
+        {
+            return await _TrafficDataService.GetLastSecondsAsync(seconds);
+        }
+
         // GET api/<TrafficDataController>/5
         [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<TrafficData>> Get(String id)
