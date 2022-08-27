@@ -9,14 +9,10 @@ public class RoadsService
 {
     private readonly IMongoCollection<Road> _Roads;
 
-    public RoadsService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public RoadsService()
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.Database);
+        var mongoClient = new MongoClient("mongodb+srv://admin:admin@smartlights.0tdmts4.mongodb.net/?retryWrites=true&w=majority");
+        var mongoDatabase = mongoClient.GetDatabase("SmartLights");
 
         _Roads = mongoDatabase.GetCollection<Road>("Roads");
     }

@@ -12,7 +12,8 @@ namespace Business.Models
         [BsonId]
         public String? ID { get; set; }
         public String TrafficLightID { get; set; }
-        public DateTime Generated { get; set; } =DateTime.Now;
+        public String TrafficLightName { get; set; }
+        public DateTime Generated { get; set; } = DateTime.Now;
         public int RoadA_EW { get; set; }
         public int RoadA_WE { get; set; }
         public int RoadB_NS { get; set; }

@@ -9,14 +9,10 @@ public class UsersService
 {
     private readonly IMongoCollection<User> _Users;
 
-    public UsersService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public UsersService()
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.Database);
+        var mongoClient = new MongoClient("mongodb+srv://admin:admin@smartlights.0tdmts4.mongodb.net/?retryWrites=true&w=majority");
+        var mongoDatabase = mongoClient.GetDatabase("SmartLights");
 
         _Users = mongoDatabase.GetCollection<User>("Users");
     }

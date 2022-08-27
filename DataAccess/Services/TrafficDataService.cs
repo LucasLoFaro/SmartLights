@@ -9,14 +9,10 @@ public class TrafficDataService
 {
     private readonly IMongoCollection<TrafficData> _TrafficData;
 
-    public TrafficDataService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public TrafficDataService()
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.Database);
+        var mongoClient = new MongoClient("mongodb+srv://admin:admin@smartlights.0tdmts4.mongodb.net/?retryWrites=true&w=majority");
+        var mongoDatabase = mongoClient.GetDatabase("SmartLights");
 
         _TrafficData = mongoDatabase.GetCollection<TrafficData>("TrafficData");
     }
