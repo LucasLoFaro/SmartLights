@@ -41,11 +41,18 @@
       $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
         var circles = [];
         $.each( data, function( key, val ) {
+
+            var color = "#00FF00";
+            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+                color = "#FFFF00";
+            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+                color = "#FF0000";
+
             circles.push(new google.maps.Circle({
-                strokeColor: "#FFFF00",
+                strokeColor: color,
                 strokeOpacity: 0.5,
                 strokeWeight: 0.5,
-                fillColor: "#FFFF00",
+                fillColor: color,
                 fillOpacity: 0.35,
                 map,
                 center: { lat: val.Latitude, lng: val.Longitude },
