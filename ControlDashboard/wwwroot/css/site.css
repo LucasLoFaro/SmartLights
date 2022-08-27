@@ -13,13 +13,15 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
+#map {
+    height: 800px;
 }
 
-#map {
-    height: 400px;
-    /* The height is 400 pixels */
+.container main {
     width: 100%;
-    /* The width is the width of the web page */
+}
+
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
 }

@@ -20,6 +20,9 @@ public class TrafficDataService
     public async Task<List<TrafficData>> GetAsync() =>
         await _TrafficData.Find(_ => true).ToListAsync();
 
+    public async Task<List<TrafficData>> GetLastSecondsAsync(int seconds) =>
+        await _TrafficData.Find(x => x.Generated > DateTime.Now.AddSeconds(-seconds)).ToListAsync();
+
     public async Task<TrafficData?> GetAsync(String id) =>
         await _TrafficData.Find(x => x.ID == id).FirstOrDefaultAsync();
 
