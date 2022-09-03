@@ -5,17 +5,18 @@
 }
 
 <div id="map"></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7m9x4pVexREGuY2Waki0p3rKWMc_GpVM&callback=initMap&v=weekly"
     defer
 ></script>
 <script type="text/javascript">
-
+    var map;
 
     // Initialize and add the map
     function initMap() {
       // The map, centered at Uluru
-      const map = new google.maps.Map(document.getElementById("map"), {
+      map = new google.maps.Map(document.getElementById("map"), {
         zoom: 18,
         center: { lat: -34.56521, lng: -58.4384375 },
       });
@@ -64,4 +65,34 @@
       window.initMap = initMap;
     }
     
+</script>
+<script type="text/javascript">
+    $(function () {
+        UpdateTrafficLights();
+        setInterval(function () { UpdateTrafficLights() }, 1000);
+    });
+    function UpdateTrafficLights() {
+        $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+        var circles = [];
+        $.each( data, function( key, val ) {
+
+            var color = "#00FF00";
+            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+                color = "#FFFF00";
+            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+                color = "#FF0000";
+
+            circles.push(new google.maps.Circle({
+                strokeColor: color,
+                strokeOpacity: 0.5,
+                strokeWeight: 0.5,
+                fillColor: color,
+                fillOpacity: 0.35,
+                map,
+                center: { lat: val.Latitude, lng: val.Longitude },
+                radius: 10,
+            }));
+        });
+      });
+    }
 </script>
