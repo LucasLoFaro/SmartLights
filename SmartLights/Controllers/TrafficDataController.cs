@@ -1,4 +1,5 @@
 ﻿using Business.Models;
+using Business.DTOs;
 using DataAccess.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,10 +13,14 @@ namespace TrafficControllerAPI.Controllers
     {
 
         private readonly TrafficDataService _TrafficDataService;
-        
-        public TrafficDataController(TrafficDataService trafficDataService) =>
-            _TrafficDataService = trafficDataService;
+        private readonly TrafficLightsService _TrafficLightsService;
 
+        public TrafficDataController(TrafficDataService trafficDataService, TrafficLightsService trafficLightsService)
+        {
+            _TrafficDataService = trafficDataService;
+            _TrafficLightsService = trafficLightsService;
+        }
+            
         // GET: api/<TrafficDataController>
         [HttpGet]
         public async Task<List<TrafficData>> Get()
@@ -28,6 +33,55 @@ namespace TrafficControllerAPI.Controllers
         public async Task<List<TrafficData>> GetLastSeconds(int seconds)
         {
             return await _TrafficDataService.GetLastSecondsAsync(seconds);
+        }
+
+        // GET: api/<TrafficDataController/Last/5>
+        [HttpGet("Lights/{seconds}")]
+        public async Task<List<TrafficLightsInfoDTO>> GetLightsDataForLastSeconds(int seconds)
+        {
+            List<TrafficData> TrafficData = await _TrafficDataService.GetLastSecondsAsync(seconds);
+            List<TrafficLight> Lights = await _TrafficLightsService.GetAsync();
+            List<TrafficLightsInfoDTO> LightsInfo = new List<TrafficLightsInfoDTO>();
+
+
+            foreach (var trafficData in TrafficData)
+            {
+                //Compare current value to average
+                TrafficData AverageValue = Lights.Find(x => x.ID == trafficData.TrafficLightID).AverageValue;
+                TrafficData Comparison = trafficData % AverageValue;
+
+                //Mapping Model data to DTO
+                TrafficLightsInfoDTO LightInfo = new();
+                LightInfo.TrafficLightID = trafficData.TrafficLightID;
+                LightInfo.TrafficLightName = trafficData.TrafficLightName;
+                LightInfo.Latitude = trafficData.Latitude;
+                LightInfo.Longitude = trafficData.Longitude;
+                LightInfo.CurrentTrafficData = trafficData;
+                LightInfo.AverageTrafficData = AverageValue;
+                LightInfo.Comparison = Comparison;
+                LightInfo.Color = LightColor.Green.ToString();
+                //If its morning, West to East and South to North directions will be considered.
+                if (DateTime.Now.Hour < 13)
+                {
+                    if (Comparison.RoadA_WE > 115 || Comparison.RoadB_SN > 115)
+                        LightInfo.Color = LightColor.Yellow.ToString();
+
+                    if (Comparison.RoadA_WE > 130 || Comparison.RoadB_SN > 130)
+                        LightInfo.Color = LightColor.Red.ToString();
+                }
+                //If its the afternoon, East to West and North to South directions will be considered.
+                else if (DateTime.Now.Hour > 13)
+                {
+                    if (Comparison.RoadA_EW > 115 || Comparison.RoadB_NS > 115)
+                        LightInfo.Color = LightColor.Yellow.ToString();
+
+                    if (Comparison.RoadA_EW > 130 || Comparison.RoadB_NS > 130)
+                        LightInfo.Color = LightColor.Red.ToString();
+                }
+                LightsInfo.Add(LightInfo);
+            }
+            
+            return LightsInfo;
         }
 
         // GET api/<TrafficDataController>/5

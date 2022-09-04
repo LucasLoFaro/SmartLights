@@ -39,10 +39,17 @@
       });
       lines.setMap(map);
 
-      $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
-        var circles = [];
-        $.each( data, function( key, val ) {
+      var circles = [];
 
+      $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+        
+        for (let i = 0; i < circles.length; i++) {
+            circles[i] = null;
+            circles[i].setMap(map);
+        }
+
+        $.each( data, function( key, val ) {
+            
             var color = "#00FF00";
             if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
                 color = "#FFFF00";
@@ -55,11 +62,15 @@
                 strokeWeight: 0.5,
                 fillColor: color,
                 fillOpacity: 0.35,
-                map,
                 center: { lat: val.Latitude, lng: val.Longitude },
                 radius: 10,
             }));
         });
+
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].setMap(map);
+          }
+        
       });
 
       window.initMap = initMap;
