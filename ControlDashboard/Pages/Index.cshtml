@@ -110,6 +110,11 @@
                     if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
                         color = "#FF0000";
 
+                    var existing = circles.find(c => (c.center.lat.Scopes[0].e === val.Latitude && c.center.lng.Scopes[0].f === val.Longitude));
+                    if (existing) {
+                        circles.pop(existing);
+                    }
+
                     circles.push(new google.maps.Circle({
                         strokeColor: color,
                         strokeOpacity: 0.5,

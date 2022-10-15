@@ -29,6 +29,12 @@ GPIO.setup(RED1,GPIO.OUT)
 GPIO.setup(GREEN2,GPIO.OUT)
 GPIO.setup(YELLOW2,GPIO.OUT)
 GPIO.setup(RED2,GPIO.OUT)
+GPIO.output(GREEN1,GPIO.LOW)
+GPIO.output(GREEN1,GPIO.LOW)
+GPIO.output(YELLOW1,GPIO.LOW)
+GPIO.output(YELLOW1,GPIO.LOW)
+GPIO.output(RED1,GPIO.LOW)
+GPIO.output(RED1,GPIO.LOW)
 
 
 
@@ -70,6 +76,10 @@ def light1():
         GPIO.output(RED1,GPIO.HIGH)
         time.sleep(3)
         GPIO.output(RED1,GPIO.LOW)
+        print('Yellow 1')
+        GPIO.output(YELLOW1,GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(YELLOW1,GPIO.LOW)
 
 
 def light2():
