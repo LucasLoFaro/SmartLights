@@ -3,15 +3,17 @@
 @{
     ViewData["Title"] = "SmartLights";
 }
+@inject IConfiguration _config
 
 <div id="map"></div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7m9x4pVexREGuY2Waki0p3rKWMc_GpVM&callback=initMap&v=weekly"
+    src="@(_config.GetSection("GoogleMaps")["APIKey"])"
     defer
 ></script>
 <script type="text/javascript">
     var map;
+    let url = "@(_config.GetSection("Backend")["URL"] + "/api/TrafficData/Last/10")"
 
     // Initialize and add the map
     function initMap() {
@@ -41,7 +43,10 @@
 
       var circles = [];
 
-      $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+      
+      
+
+      $.getJSON( url, function( data ) {
         
         for (let i = 0; i < circles.length; i++) {
             circles[i] = null;
@@ -75,15 +80,13 @@
 
       window.initMap = initMap;
     }
-    
-</script>
-<script type="text/javascript">
+
     $(function () {
         UpdateTrafficLights();
         setInterval(function () { UpdateTrafficLights() }, 1000);
     });
     function UpdateTrafficLights() {
-        $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+        $.getJSON( url, function( data ) {
         var circles = [];
         $.each( data, function( key, val ) {
 
