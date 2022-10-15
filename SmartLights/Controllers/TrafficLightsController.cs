@@ -35,6 +35,13 @@ namespace TrafficControllerAPI.Controllers
             return trafficLight;
         }
 
+        // GET api/<TrafficLightsController>/Road/5
+        [HttpGet("Road/{roadID:length(24)}")]
+        public async Task<ActionResult<List<TrafficLight>>> GetByRoadID(String roadID)
+        {
+            return await _TrafficLightsService.GetByRoadIDAsync(roadID);
+        }
+
         // POST api/<TrafficLightsController>
         [HttpPost]
         public async Task<IActionResult> Post(TrafficLight newTrafficLight)
