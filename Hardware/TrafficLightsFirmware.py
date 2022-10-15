@@ -4,6 +4,13 @@ from threading import Timer
 import threading
 import RPi.GPIO as GPIO
 import random
+from gpiozero import Button
+import requests
+
+
+
+sensorEW = Button(26)
+sensorNS = Button(19)
 
 GREEN1, YELLOW1, RED1 = 18, 23, 24 
 GREEN2, YELLOW2, RED2 = 17, 27, 22
@@ -31,7 +38,8 @@ def postTrafficData():
     global trafficNSCounter
     global trafficSNCounter
 
-    data = json.dumps({
+
+    data = {
         "TrafficLightID": "62f874e8d55125227da25a0f",
         "TrafficLightName": "Soldado y Olleros",
         "Latitude": -34.56536,
@@ -40,8 +48,11 @@ def postTrafficData():
         "RoadA_WE": trafficWECounter,
         "RoadB_NS": trafficNSCounter,
         "RoadB_SN": trafficSNCounter
-    })
+    }
     print(data)
+    url = 'https://smartlightsapi.azurewebsites.net/api/TrafficData'
+    response = requests.post(url, json = data)
+    print(response.status_code)
     clearCounters()
     
 
@@ -110,3 +121,11 @@ while True:
     trafficNSCounter = random.randint(0, 9)
     trafficSNCounter = random.randint(0, 9)
     time.sleep(1)
+
+    # sensorEW.wait_for_press()
+    # sensorEW.wait_for_release()
+    # trafficEWCounter = trafficEWCounter + 1
+
+    # sensorNS.wait_for_press()
+    # sensorNS.wait_for_release()
+    # trafficNSCounter = trafficNSCounter + 1
