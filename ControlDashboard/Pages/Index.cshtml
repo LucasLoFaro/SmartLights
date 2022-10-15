@@ -13,7 +13,11 @@
 ></script>
 <script type="text/javascript">
     var map;
+    var circles = [];
+    var trafficDataLocal;
     let url = "@(_config.GetSection("Backend")["URL"] + "/api/TrafficData/Last/10")"
+    
+    
 
     // Initialize and add the map
     function initMap() {
@@ -41,12 +45,10 @@
       });
       lines.setMap(map);
 
-      var circles = [];
-
-      
-      
 
       $.getJSON( url, function( data ) {
+
+        trafficDataLocal = data;
         
         for (let i = 0; i < circles.length; i++) {
             circles[i] = null;
@@ -84,29 +86,43 @@
     $(function () {
         UpdateTrafficLights();
         setInterval(function () { UpdateTrafficLights() }, 1000);
+        setInterval(function () { clearsCirclesInMap() }, 5000);
     });
+
+    function clearsCirclesInMap() {
+        //clear circles from map on each refresh
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].setMap(null);
+          }
+        circles = [];
+    };
+    
     function UpdateTrafficLights() {
+
         $.getJSON( url, function( data ) {
-        var circles = [];
-        $.each( data, function( key, val ) {
 
-            var color = "#00FF00";
-            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
-                color = "#FFFF00";
-            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
-                color = "#FF0000";
+            $.each( data, function( key, val ) {
 
-            circles.push(new google.maps.Circle({
-                strokeColor: color,
-                strokeOpacity: 0.5,
-                strokeWeight: 0.5,
-                fillColor: color,
-                fillOpacity: 0.35,
-                map,
-                center: { lat: val.Latitude, lng: val.Longitude },
-                radius: 10,
-            }));
-        });
+                if (!trafficDataLocal.find(p => p.ID === val.ID)) {
+                    var color = "#00FF00";
+                    if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+                        color = "#FFFF00";
+                    if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+                        color = "#FF0000";
+
+                    circles.push(new google.maps.Circle({
+                        strokeColor: color,
+                        strokeOpacity: 0.5,
+                        strokeWeight: 0.5,
+                        fillColor: color,
+                        fillOpacity: 0.35,
+                        map,
+                        center: { lat: val.Latitude, lng: val.Longitude },
+                        radius: 10,
+                    }));
+                    trafficDataLocal[trafficDataLocal.length] = val;
+                }            
+            });
       });
     }
 </script>
