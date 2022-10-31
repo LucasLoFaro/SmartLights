@@ -31,19 +31,7 @@
       const trafficLayer = new google.maps.TrafficLayer();
       trafficLayer.setMap(map)
 
-      //Drawing road traffic line
-      const line = [
-        { lat: -34.56521, lng: -58.4384375 },
-        { lat: -34.5660928, lng: -58.4394083}
-      ];
-      const lines = new google.maps.Polyline({
-        path: line,
-        geodesic: true,
-        strokeColor: "#FFDD00",
-        strokeOpacity: .7,
-        strokeWeight: 6,
-      });
-      lines.setMap(map);
+      
 
 
       $.getJSON( url, function( data ) {

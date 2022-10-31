@@ -3,7 +3,6 @@ using DataAccess.Services;
 using DataAccess.Database;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
-using System.Threading;
 
 var builder = new ConfigurationBuilder()
                .AddJsonFile($"appsettings.json", true, true);

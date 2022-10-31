@@ -108,8 +108,10 @@ namespace TrafficControllerAPI.Controllers
         public async Task<IActionResult> Post(TrafficData newTrafficData)
         {
             await _TrafficDataService.CreateAsync(newTrafficData);
-
-            return CreatedAtAction(nameof(Get), new { id = newTrafficData.ID }, newTrafficData);
+            TrafficLight Light = await _TrafficLightsService.GetAsync(newTrafficData.TrafficLightID);
+            return CreatedAtAction(nameof(Get),
+                                   new TrafficDataResponseDTO { NewConfiguration = Light.Configuration },
+                                   newTrafficData);
         }
 
         [HttpPut("{id:length(24)}")]
