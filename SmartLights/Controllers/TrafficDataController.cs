@@ -63,19 +63,19 @@ namespace TrafficControllerAPI.Controllers
                 //If its morning, West to East and South to North directions will be considered.
                 if (DateTime.Now.Hour < 13)
                 {
-                    if (Comparison.RoadA_WE > 115 || Comparison.RoadB_SN > 115)
+                    if (Comparison.CarCountWE > 115 || Comparison.CarCountSN > 115)
                         LightInfo.Color = LightColor.Yellow.ToString();
 
-                    if (Comparison.RoadA_WE > 130 || Comparison.RoadB_SN > 130)
+                    if (Comparison.CarCountWE > 130 || Comparison.CarCountSN > 130)
                         LightInfo.Color = LightColor.Red.ToString();
                 }
                 //If its the afternoon, East to West and North to South directions will be considered.
                 else if (DateTime.Now.Hour > 13)
                 {
-                    if (Comparison.RoadA_EW > 115 || Comparison.RoadB_NS > 115)
+                    if (Comparison.CarCountEW > 115 || Comparison.CarCountNS > 115)
                         LightInfo.Color = LightColor.Yellow.ToString();
 
-                    if (Comparison.RoadA_EW > 130 || Comparison.RoadB_NS > 130)
+                    if (Comparison.CarCountEW > 130 || Comparison.CarCountNS > 130)
                         LightInfo.Color = LightColor.Red.ToString();
                 }
                 LightsInfo.Add(LightInfo);

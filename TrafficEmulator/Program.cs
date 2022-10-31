@@ -45,6 +45,7 @@ switch (Environment.GetCommandLineArgs()[2])
 int carCount = Convert.ToInt32(Environment.GetCommandLineArgs()[3]);
 
 //int speed = 30;
+int speed = Convert.ToInt32(Environment.GetCommandLineArgs()[4]);
 
 //Get traffic lights in order
 Road Road = await _RoadsService.GetAsync(roadID);
@@ -52,16 +53,9 @@ List<TrafficLight> Lights = await _TrafficLightsService.GetByRoadIDAsync(Road.ID
 List<TrafficData> dataset = new List<TrafficData>();
 
 //Initialice all traffic lights
-for (int i = 0; i < Lights.Count; i++)
-{
-    dataset.Add(new TrafficData());
-    dataset[i].TrafficLightName = Lights[i].Name;
-    dataset[i].TrafficLightID = Lights[i].ID;
-    dataset[i].Latitude = Lights[i].Latitude;
-    dataset[i].Longitude = Lights[i].Longitude;
-}
+InitialiceDataset(Lights, dataset);
 
-const int LIGHTS_INTERVAL = 3000;
+const int LIGHTS_INTERVAL = 10000;
 Timer _TrafficLightPostTimer = new Timer (TimerCallback, null, 0, LIGHTS_INTERVAL);
 
 //Update counters
@@ -76,19 +70,23 @@ for (int i = 0; i < Lights.Count; i++)
     switch (direction)
     {
         case RoadDirection.EastToWest:
-            dataset[i].RoadA_EW += carCount;
+            dataset[i].CarCountEW += carCount;
+            dataset[i].CarPassingTimeEW += 10 / speed;
             break;
 
         case RoadDirection.WestToEast:
-            dataset[i].RoadA_WE += carCount;
+            dataset[i].CarCountWE += carCount;
+            dataset[i].CarPassingTimeWE += 10 / speed;
             break;
 
         case RoadDirection.NorthToSouth:
-            dataset[i].RoadB_NS += carCount;
+            dataset[i].CarCountNS += carCount;
+            dataset[i].CarPassingTimeNS += 10 / speed;
             break;
 
         case RoadDirection.SouthToNorth:
-            dataset[i].RoadB_SN += carCount;
+            dataset[i].CarCountSN += carCount;
+            dataset[i].CarPassingTimeSN += 10 / speed;
             break;
     }
 
@@ -98,32 +96,23 @@ for (int i = 0; i < Lights.Count; i++)
 
 _TrafficLightPostTimer.Change(Timeout.Infinite, Timeout.Infinite);
 
-//Every 1 second post traffic light data.
-
-//POST /api/TrafficData
-/*
-{
-  "TrafficLightID": "62f874e8d55125227da25a0f",
-  "RoadA_EW": 0,
-  "RoadA_WE": 7,
-  "RoadA_NS": 2,
-  "RoadA_SN": 0
-} 
- */
-
-
+//Every 10 second post traffic light data.
 void TimerCallback(Object o)
 {
-    for(int i=0; i<Lights.Count;i++)
+    for (int i = 0; i < Lights.Count; i++)
     {
         Console.WriteLine("Posting data for light " + dataset[i].TrafficLightName);
 
         String body = @"
         {
-            'RoadA_EW': " + dataset[i].RoadA_EW+ @",
-            'RoadA_WE': " + dataset[i].RoadA_WE + @",
-            'RoadB_NS': " + dataset[i].RoadB_NS + @",
-            'RoadB_SN': " + dataset[i].RoadB_SN + @"
+            'CarCountEW': " + dataset[i].CarCountEW + @",
+            'CarPassingTimeEW': " + dataset[i].CarPassingTimeEW + @",
+            'CarCountWE': " + dataset[i].CarCountWE + @",
+            'CarPassingTimeWE': " + dataset[i].CarPassingTimeWE + @",
+            'CarCountNS': " + dataset[i].CarCountNS + @",
+            'CarPassingTimeEW': " + dataset[i].CarPassingTimeNS + @",            
+            'CarCountSN': " + dataset[i].CarCountSN + @",
+            'CarPassingTimeEW': " + dataset[i].CarPassingTimeSN + @",
         }";
 
         Console.WriteLine(body);
@@ -132,6 +121,11 @@ void TimerCallback(Object o)
 
     //reset dataset
     dataset.Clear();
+    InitialiceDataset(Lights, dataset);
+}
+
+static void InitialiceDataset(List<TrafficLight> Lights, List<TrafficData> dataset)
+{
     for (int i = 0; i < Lights.Count; i++)
     {
         dataset.Add(new TrafficData());
@@ -141,26 +135,3 @@ void TimerCallback(Object o)
         dataset[i].Longitude = Lights[i].Longitude;
     }
 }
-
-
-
-//static async Task SumPageSizesAsync()
-//{
-
-//    IEnumerable<Task<int>> downloadTasksQuery =
-//        from url in s_urlList
-//        select ProcessUrlAsync(url, s_client);
-
-//    List<Task<int>> downloadTasks = downloadTasksQuery.ToList();
-
-//    int total = 0;
-//    while (downloadTasks.Any())
-//    {
-//        Task<int> finishedTask = await Task.WhenAny(downloadTasks);
-//        downloadTasks.Remove(finishedTask);
-//        total += await finishedTask;
-//    }
-
-//    Console.WriteLine($"\nTotal bytes returned:  {total:#,#}");
-//    Console.WriteLine($"Elapsed time:          {stopwatch.Elapsed}\n");
-//}

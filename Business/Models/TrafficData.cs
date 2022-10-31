@@ -16,31 +16,35 @@ namespace Business.Models
         public Double Latitude { get; set; }
         public Double Longitude { get; set; }
         public DateTime Generated { get; set; } = DateTime.Now;
-        public int RoadA_EW { get; set; }
-        public int RoadA_WE { get; set; }
-        public int RoadB_NS { get; set; }
-        public int RoadB_SN { get; set; }
+        public int CarCountEW { get; set; }
+        public int CarPassingTimeEW { get; set; }
+        public int CarCountWE { get; set; }
+        public int CarPassingTimeWE { get; set; }
+        public int CarCountNS { get; set; }
+        public int CarPassingTimeNS { get; set; }
+        public int CarCountSN { get; set; }
+        public int CarPassingTimeSN { get; set; }
 
         public static TrafficData operator % (TrafficData a, TrafficData b)
         {
             TrafficData result = a;
 
-            if (b.RoadA_EW == 0)
-                result.RoadA_EW = a.RoadA_EW;
+            if (b.CarCountEW == 0)
+                result.CarCountEW = a.CarCountEW;
             else
-                result.RoadA_EW = a.RoadA_EW * 100 / b.RoadA_EW;
-            if (b.RoadA_WE == 0)
-                result.RoadA_WE = a.RoadA_WE;
+                result.CarCountEW = a.CarCountEW * 100 / b.CarCountEW;
+            if (b.CarCountWE == 0)
+                result.CarCountWE = a.CarCountWE;
             else
-                result.RoadA_WE = a.RoadA_WE * 100 / b.RoadA_WE;
-            if (b.RoadB_NS == 0)
-                result.RoadB_NS = a.RoadB_NS;
+                result.CarCountWE = a.CarCountWE * 100 / b.CarCountWE;
+            if (b.CarCountNS == 0)
+                result.CarCountNS = a.CarCountNS;
             else
-                result.RoadB_NS = a.RoadB_NS * 100 / b.RoadB_NS;
-            if (b.RoadB_SN == 0)
-                result.RoadB_SN = a.RoadB_SN;
+                result.CarCountNS = a.CarCountNS * 100 / b.CarCountNS;
+            if (b.CarCountSN == 0)
+                result.CarCountSN = a.CarCountSN;
             else
-                result.RoadB_SN = a.RoadB_SN * 100 / b.RoadB_SN;
+                result.CarCountSN = a.CarCountSN * 100 / b.CarCountSN;
 
             return result;
         }

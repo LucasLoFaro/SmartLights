@@ -29,15 +29,15 @@ foreach (TrafficLight Light in Lights)
         int EWAverage = 0, WEAverage = 0, NSAverage = 0, SNAverage = 0;
         foreach (TrafficData record in LastRecords)
         {
-            EWAverage += record.RoadA_EW;
-            WEAverage += record.RoadA_WE;
-            NSAverage += record.RoadB_NS;
-            SNAverage += record.RoadB_SN;
+            EWAverage += record.CarCountEW;
+            WEAverage += record.CarCountWE;
+            NSAverage += record.CarCountNS;
+            SNAverage += record.CarCountSN;
         }
-        Light.AverageValue.RoadA_EW = EWAverage / LastRecords.Count();
-        Light.AverageValue.RoadA_WE = WEAverage / LastRecords.Count();
-        Light.AverageValue.RoadB_NS = NSAverage / LastRecords.Count();
-        Light.AverageValue.RoadB_SN = SNAverage / LastRecords.Count();
+        Light.AverageValue.CarCountEW = EWAverage / LastRecords.Count();
+        Light.AverageValue.CarCountWE = WEAverage / LastRecords.Count();
+        Light.AverageValue.CarCountNS = NSAverage / LastRecords.Count();
+        Light.AverageValue.CarCountSN = SNAverage / LastRecords.Count();
     }
 
     /*if (es mañana)
@@ -51,11 +51,15 @@ foreach (TrafficLight Light in Lights)
      * Comparar con HistoricalData        
      * Actualizar CurrentCongestion
      * Actualizar Configuration
+     * 
+     *      ????????
        * Configuration.RoadAPriority += (Historical.WE - Current.WE)
        * Configuration.RoadAPriority += (Historical.WE - Current.WE)
        * Configuration.RoadBPriority += (Historical.WE - Current.WE)
        * Configuration.RoadBPriority += (Historical.WE - Current.WE)
-     * Actualizar HistoricalData
+     
+     
+     * Actualizar HistoricalData de alguna manera
      */
 
 

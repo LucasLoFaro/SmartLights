@@ -46,9 +46,9 @@
         $.each( data, function( key, val ) {
             
             var color = "#00FF00";
-            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+            if(val.CarCountEW > 10 || val.CarCountWE > 10 || val.CarCountNS > 10 || val.CarCountSN > 10)
                 color = "#FFFF00";
-            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+            if(val.CarCountEW > 20 || val.CarCountWE > 20 || val.CarCountNS > 20 || val.CarCountSN > 20)
                 color = "#FF0000";
 
             circles.push(new google.maps.Circle({
@@ -93,9 +93,9 @@
 
                 if (!trafficDataLocal.find(p => p.ID === val.ID)) {
                     var color = "#00FF00";
-                    if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+                    if(val.CarCountEW > 10 || val.CarCountWE > 10 || val.CarCountNS > 10 || val.CarCountSN > 10)
                         color = "#FFFF00";
-                    if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+                    if(val.CarCountEW > 20 || val.CarCountWE > 20 || val.CarCountNS > 20 || val.CarCountSN > 20)
                         color = "#FF0000";
 
                     var existing = circles.find(c => (c.center.lat.Scopes[0].e === val.Latitude && c.center.lng.Scopes[0].f === val.Longitude));
