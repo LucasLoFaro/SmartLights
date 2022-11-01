@@ -29,6 +29,9 @@ public class TrafficDataService
     public async Task<List<TrafficData>> GetByTrafficLightIDAsync(String trafficLightID) =>
         await _TrafficData.Find(x => x.TrafficLightID == trafficLightID).ToListAsync();
 
+    public async Task<List<TrafficData>> GetLastSecondsByTrafficLightIDAsync(String trafficLightID, int seconds) =>
+        await _TrafficData.Find(x => x.TrafficLightID == trafficLightID && x.Generated > DateTime.Now.AddSeconds(-seconds)).ToListAsync();
+
     public async Task CreateAsync(TrafficData newTrafficData) =>
         await _TrafficData.InsertOneAsync(newTrafficData);
 

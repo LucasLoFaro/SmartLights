@@ -47,7 +47,7 @@ namespace TrafficControllerAPI.Controllers
             foreach (var trafficData in TrafficData)
             {
                 //Compare current value to average
-                TrafficData AverageValue = Lights.Find(x => x.ID == trafficData.TrafficLightID).AverageValue;
+                TrafficData AverageValue = Lights.Find(x => x.ID == trafficData.TrafficLightID).AverageStatus;
                 TrafficData Comparison = trafficData % AverageValue;
 
                 //Mapping Model data to DTO
@@ -63,19 +63,19 @@ namespace TrafficControllerAPI.Controllers
                 //If its morning, West to East and South to North directions will be considered.
                 if (DateTime.Now.Hour < 13)
                 {
-                    if (Comparison.RoadA_WE > 115 || Comparison.RoadB_SN > 115)
+                    if (Comparison.CarCountWE > 115 || Comparison.CarCountSN > 115)
                         LightInfo.Color = LightColor.Yellow.ToString();
 
-                    if (Comparison.RoadA_WE > 130 || Comparison.RoadB_SN > 130)
+                    if (Comparison.CarCountWE > 130 || Comparison.CarCountSN > 130)
                         LightInfo.Color = LightColor.Red.ToString();
                 }
                 //If its the afternoon, East to West and North to South directions will be considered.
                 else if (DateTime.Now.Hour > 13)
                 {
-                    if (Comparison.RoadA_EW > 115 || Comparison.RoadB_NS > 115)
+                    if (Comparison.CarCountEW > 115 || Comparison.CarCountNS > 115)
                         LightInfo.Color = LightColor.Yellow.ToString();
 
-                    if (Comparison.RoadA_EW > 130 || Comparison.RoadB_NS > 130)
+                    if (Comparison.CarCountEW > 130 || Comparison.CarCountNS > 130)
                         LightInfo.Color = LightColor.Red.ToString();
                 }
                 LightsInfo.Add(LightInfo);
@@ -108,8 +108,16 @@ namespace TrafficControllerAPI.Controllers
         public async Task<IActionResult> Post(TrafficData newTrafficData)
         {
             await _TrafficDataService.CreateAsync(newTrafficData);
+            
+            TrafficLight Light = await _TrafficLightsService.GetAsync(newTrafficData.TrafficLightID);
+            Light.CurrentStatus = newTrafficData;
+            Light.HistoricalData.Add(newTrafficData);
+            Light.LastReport = DateTime.UtcNow;
+            Light.UpdateCurrentCongestion();
 
-            return CreatedAtAction(nameof(Get), new { id = newTrafficData.ID }, newTrafficData);
+            await _TrafficLightsService.UpdateAsync(newTrafficData.TrafficLightID, Light);
+
+            return CreatedAtAction(nameof(Get), new TrafficDataResponseDTO { NewConfiguration = Light.Configuration });
         }
 
         [HttpPut("{id:length(24)}")]

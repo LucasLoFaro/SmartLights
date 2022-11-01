@@ -3,15 +3,21 @@
 @{
     ViewData["Title"] = "SmartLights";
 }
+@inject IConfiguration _config
 
 <div id="map"></div>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7m9x4pVexREGuY2Waki0p3rKWMc_GpVM&callback=initMap&v=weekly"
+    src="@(_config.GetSection("GoogleMaps")["APIKey"])"
     defer
 ></script>
 <script type="text/javascript">
     var map;
+    var circles = [];
+    var trafficDataLocal;
+    let url = "@(_config.GetSection("Backend")["URL"] + "/api/TrafficData/Last/10")"
+    
+    
 
     // Initialize and add the map
     function initMap() {
@@ -25,23 +31,12 @@
       const trafficLayer = new google.maps.TrafficLayer();
       trafficLayer.setMap(map)
 
-      //Drawing road traffic line
-      const line = [
-        { lat: -34.56521, lng: -58.4384375 },
-        { lat: -34.5660928, lng: -58.4394083}
-      ];
-      const lines = new google.maps.Polyline({
-        path: line,
-        geodesic: true,
-        strokeColor: "#FFDD00",
-        strokeOpacity: .7,
-        strokeWeight: 6,
-      });
-      lines.setMap(map);
+      
 
-      var circles = [];
 
-      $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
+      $.getJSON( url, function( data ) {
+
+        trafficDataLocal = data;
         
         for (let i = 0; i < circles.length; i++) {
             circles[i] = null;
@@ -51,9 +46,9 @@
         $.each( data, function( key, val ) {
             
             var color = "#00FF00";
-            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
+            if(val.CarCountEW > 8 || val.CarCountWE > 8 || val.CarCountNS > 8 || val.CarCountSN > 8)
                 color = "#FFFF00";
-            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
+            if(val.CarCountEW > 15 || val.CarCountWE > 15 || val.CarCountNS > 15 || val.CarCountSN > 15)
                 color = "#FF0000";
 
             circles.push(new google.maps.Circle({
@@ -75,35 +70,52 @@
 
       window.initMap = initMap;
     }
-    
-</script>
-<script type="text/javascript">
+
     $(function () {
         UpdateTrafficLights();
         setInterval(function () { UpdateTrafficLights() }, 1000);
+        setInterval(function () { clearsCirclesInMap() }, 5000);
     });
+
+    function clearsCirclesInMap() {
+        //clear circles from map on each refresh
+        for (let i = 0; i < circles.length; i++) {
+            circles[i].setMap(null);
+          }
+        circles = [];
+    };
+    
     function UpdateTrafficLights() {
-        $.getJSON( "https://localhost:7261/api/TrafficData/Last/10", function( data ) {
-        var circles = [];
-        $.each( data, function( key, val ) {
 
-            var color = "#00FF00";
-            if(val.RoadA_EW > 10 || val.RoadA_WE > 10 || val.RoadB_NS > 10 || val.RoadB_SN > 10)
-                color = "#FFFF00";
-            if(val.RoadA_EW > 20 || val.RoadA_WE > 20 || val.RoadB_NS > 20 || val.RoadB_SN > 20)
-                color = "#FF0000";
+        $.getJSON( url, function( data ) {
 
-            circles.push(new google.maps.Circle({
-                strokeColor: color,
-                strokeOpacity: 0.5,
-                strokeWeight: 0.5,
-                fillColor: color,
-                fillOpacity: 0.35,
-                map,
-                center: { lat: val.Latitude, lng: val.Longitude },
-                radius: 10,
-            }));
-        });
+            $.each( data, function( key, val ) {
+
+                if (!trafficDataLocal.find(p => p.ID === val.ID)) {
+                    var color = "#00FF00";
+                    if(val.CarCountEW > 10 || val.CarCountWE > 10 || val.CarCountNS > 10 || val.CarCountSN > 10)
+                        color = "#FFFF00";
+                    if(val.CarCountEW > 20 || val.CarCountWE > 20 || val.CarCountNS > 20 || val.CarCountSN > 20)
+                        color = "#FF0000";
+
+                    var existing = circles.find(c => (c.center.lat.Scopes[0].e === val.Latitude && c.center.lng.Scopes[0].f === val.Longitude));
+                    if (existing) {
+                        circles.pop(existing);
+                    }
+
+                    circles.push(new google.maps.Circle({
+                        strokeColor: color,
+                        strokeOpacity: 0.5,
+                        strokeWeight: 0.5,
+                        fillColor: color,
+                        fillOpacity: 0.35,
+                        map,
+                        center: { lat: val.Latitude, lng: val.Longitude },
+                        radius: 10,
+                    }));
+                    trafficDataLocal[trafficDataLocal.length] = val;
+                }            
+            });
       });
     }
 </script>

@@ -16,8 +16,11 @@ namespace Business.Models
         public TrafficCongestion CurrentCongestion { get; set; }
         public Double Latitude { get; set; }
         public Double Longitude { get; set; }
-        public TrafficData? CurrentStatus { get; set; }
-        public TrafficData? AverageValue { get; set; }
+        public TrafficData CurrentStatus { get; set; }
+        public TrafficData? AverageStatus { get; set; }
+        public TrafficData SlowThreshold { get; set; }
+        public TrafficData MediumThreshold { get; set; }
+
         public List<TrafficData>? HistoricalData { get; set; }
         public LightConfiguration Configuration { get; set; }
         public String RoadAID { get; set; }
@@ -27,7 +30,47 @@ namespace Business.Models
         public DateTime LastReport { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; } = DateTime.Now;
 
+        public TrafficLight()
+        {
+            HistoricalData = new List<TrafficData>();
+        }
+
+        public void UpdateCurrentCongestion()
+        {
+            //ToDo: Check DateTime.UTCNow
+            
+            Double CurrentThresholdRatioEW = CurrentStatus.CarPassingTimeEW / CurrentStatus.CarCountEW;
+            Double MediumThresholdRatioEW = MediumThreshold.CarPassingTimeEW / MediumThreshold.CarCountEW;
+            Double SlowThresholdRatioEW = SlowThreshold.CarPassingTimeEW / SlowThreshold.CarCountEW;
+            
+            Double CurrentThresholdRatioWE = CurrentStatus.CarPassingTimeWE / CurrentStatus.CarCountWE;
+            Double MediumThresholdRatioWE = MediumThreshold.CarPassingTimeWE / MediumThreshold.CarCountWE;
+            Double SlowThresholdRatioWE = SlowThreshold.CarPassingTimeWE / SlowThreshold.CarCountWE;
+
+            Double CurrentThresholdRatioNS = CurrentStatus.CarPassingTimeNS / CurrentStatus.CarCountNS;
+            Double MediumThresholdRatioNS = MediumThreshold.CarPassingTimeNS / MediumThreshold.CarCountNS;
+            Double SlowThresholdRatioNS = SlowThreshold.CarPassingTimeNS / SlowThreshold.CarCountNS;
+
+            Double CurrentThresholdRatioSN = CurrentStatus.CarPassingTimeSN / CurrentStatus.CarCountSN;
+            Double MediumThresholdRatioSN = MediumThreshold.CarPassingTimeSN / MediumThreshold.CarCountSN;
+            Double SlowThresholdRatioSN = SlowThreshold.CarPassingTimeSN / SlowThreshold.CarCountSN;
+
+            if (CurrentThresholdRatioEW > MediumThresholdRatioEW || 
+                CurrentThresholdRatioWE > MediumThresholdRatioWE ||
+                CurrentThresholdRatioNS > MediumThresholdRatioNS ||
+                CurrentThresholdRatioSN > MediumThresholdRatioSN)
+                CurrentCongestion = TrafficCongestion.Severe;
+
+
+            if (CurrentThresholdRatioEW > SlowThresholdRatioEW ||
+                CurrentThresholdRatioWE > SlowThresholdRatioWE ||
+                CurrentThresholdRatioNS > SlowThresholdRatioNS ||
+                CurrentThresholdRatioSN > SlowThresholdRatioSN)
+                CurrentCongestion = TrafficCongestion.Heavy;
+        }
     }
+
+
     public enum LightStatus
     {
         Online,
@@ -35,11 +78,9 @@ namespace Business.Models
     }
     public enum TrafficCongestion
     {
-        Heavy = 5,
-        Severe = 4,
-        Normal = 3,
-        Light = 2,
-        None = 1
+        Heavy = 2,
+        Severe = 1,
+        Light = 0
     }
     public class LightConfiguration
     {
