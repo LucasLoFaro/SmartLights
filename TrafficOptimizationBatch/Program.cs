@@ -34,10 +34,10 @@ foreach (TrafficLight Light in Lights)
             NSAverage += record.CarCountNS;
             SNAverage += record.CarCountSN;
         }
-        Light.AverageValue.CarCountEW = EWAverage / LastRecords.Count();
-        Light.AverageValue.CarCountWE = WEAverage / LastRecords.Count();
-        Light.AverageValue.CarCountNS = NSAverage / LastRecords.Count();
-        Light.AverageValue.CarCountSN = SNAverage / LastRecords.Count();
+        Light.AverageStatus.CarCountEW = EWAverage / LastRecords.Count();
+        Light.AverageStatus.CarCountWE = WEAverage / LastRecords.Count();
+        Light.AverageStatus.CarCountNS = NSAverage / LastRecords.Count();
+        Light.AverageStatus.CarCountSN = SNAverage / LastRecords.Count();
     }
 
     /*if (es mañana)

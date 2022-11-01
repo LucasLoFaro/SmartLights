@@ -47,7 +47,7 @@ namespace TrafficControllerAPI.Controllers
             foreach (var trafficData in TrafficData)
             {
                 //Compare current value to average
-                TrafficData AverageValue = Lights.Find(x => x.ID == trafficData.TrafficLightID).AverageValue;
+                TrafficData AverageValue = Lights.Find(x => x.ID == trafficData.TrafficLightID).AverageStatus;
                 TrafficData Comparison = trafficData % AverageValue;
 
                 //Mapping Model data to DTO
@@ -108,10 +108,16 @@ namespace TrafficControllerAPI.Controllers
         public async Task<IActionResult> Post(TrafficData newTrafficData)
         {
             await _TrafficDataService.CreateAsync(newTrafficData);
+            
             TrafficLight Light = await _TrafficLightsService.GetAsync(newTrafficData.TrafficLightID);
-            return CreatedAtAction(nameof(Get),
-                                   new TrafficDataResponseDTO { NewConfiguration = Light.Configuration },
-                                   newTrafficData);
+            Light.CurrentStatus = newTrafficData;
+            Light.HistoricalData.Add(newTrafficData);
+            Light.LastReport = DateTime.UtcNow;
+            Light.UpdateCurrentCongestion();
+
+            await _TrafficLightsService.UpdateAsync(newTrafficData.TrafficLightID, Light);
+
+            return CreatedAtAction(nameof(Get), new TrafficDataResponseDTO { NewConfiguration = Light.Configuration });
         }
 
         [HttpPut("{id:length(24)}")]

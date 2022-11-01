@@ -15,15 +15,15 @@ namespace Business.Models
         public String TrafficLightName { get; set; }
         public Double Latitude { get; set; }
         public Double Longitude { get; set; }
-        public DateTime Generated { get; set; } = DateTime.Now;
+        public DateTime Generated { get; set; } = DateTime.UtcNow;
         public int CarCountEW { get; set; }
-        public int CarPassingTimeEW { get; set; }
+        public Double CarPassingTimeEW { get; set; }
         public int CarCountWE { get; set; }
-        public int CarPassingTimeWE { get; set; }
+        public Double CarPassingTimeWE { get; set; }
         public int CarCountNS { get; set; }
-        public int CarPassingTimeNS { get; set; }
+        public Double CarPassingTimeNS { get; set; }
         public int CarCountSN { get; set; }
-        public int CarPassingTimeSN { get; set; }
+        public Double CarPassingTimeSN { get; set; }
 
         public static TrafficData operator % (TrafficData a, TrafficData b)
         {

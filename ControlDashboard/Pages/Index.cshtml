@@ -46,9 +46,9 @@
         $.each( data, function( key, val ) {
             
             var color = "#00FF00";
-            if(val.CarCountEW > 10 || val.CarCountWE > 10 || val.CarCountNS > 10 || val.CarCountSN > 10)
+            if(val.CarCountEW > 8 || val.CarCountWE > 8 || val.CarCountNS > 8 || val.CarCountSN > 8)
                 color = "#FFFF00";
-            if(val.CarCountEW > 20 || val.CarCountWE > 20 || val.CarCountNS > 20 || val.CarCountSN > 20)
+            if(val.CarCountEW > 15 || val.CarCountWE > 15 || val.CarCountNS > 15 || val.CarCountSN > 15)
                 color = "#FF0000";
 
             circles.push(new google.maps.Circle({
