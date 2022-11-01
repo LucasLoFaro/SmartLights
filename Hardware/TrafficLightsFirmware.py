@@ -4,6 +4,7 @@ from threading import Timer
 import threading
 import RPi.GPIO as GPIO
 import requests
+import datetime
 
 #Lights pins
 GREEN_EW, YELLOW_EW, RED_EW = 2, 3, 4
@@ -19,8 +20,11 @@ TRIGGER_SN, ECHO_SN = 0, 0
 
 #Global variables
 IOTHUB_URL = 'https://smartlightsapi.azurewebsites.net/api/TrafficData'
-lightsDurationEW = 6
-lightsDurationNS = 3
+POST_DATA_INTERVAL = 16
+lightsDurationEW = 8
+lightsDurationNS = 8
+currentLightEW = 'Green'
+currentLightNS = 'Red'
 
 carCountEW, carCountWE, carCountNS, carCountSN = 0, 0, 0, 0
 carPassingTimeEW, carPassingTimeWE, carPassingTimeNS, carPassingTimeSN = 0, 0, 0, 0
@@ -58,6 +62,8 @@ def postTrafficData():
     global carCountWE
     global carCountNS
     global carCountSN
+    global lightsDurationEW
+    global lightsDurationNS
 
     data = {
         "TrafficLightID": "62f874e8d55125227da25a0f",
@@ -73,39 +79,62 @@ def postTrafficData():
         "CarCountSN": carCountSN,
         "CarPassingTimeSN": carPassingTimeSN
     }
+    print("Request: ")
     print(data)
+    
     response = requests.post(IOTHUB_URL, json = data)
-    print(response.status_code)
+    data = response.json()
+    print("Response: ")
+    print(data)
+    totalTimeStr = data['NewConfiguration']['TotalTime']
+    
+    totalSeconds = datetime.timedelta(hours = int(totalTimeStr[:2]), 
+                        minutes = int(totalTimeStr[3:-3]),
+                        seconds = int(totalTimeStr[-2:])).total_seconds() - 1
+
+    lightsDurationEW = totalSeconds  * float(data['NewConfiguration']['RoadAPriority'])
+    lightsDurationNS = totalSeconds * float(data['NewConfiguration']['RoadBPriority'])
+
+    print("EW: " + str(lightsDurationEW))
+    print("NS: " + str(lightsDurationNS))
+    
     clearCounters()
     
 
 def lights():
     global lightsDurationEW
     global lightsDurationNS
+    global currentLightEW
+    global currentLightNS
 
     while True:
-        print('Green 1')
+        print('EW: Green')
+        currentLightEW = 'Green'
         GPIO.output(GREEN_EW,GPIO.HIGH)
-        print('Red 2')
+        print('NS: Red')
+        currentLightNS = 'Red'
         GPIO.output(RED_NS,GPIO.HIGH)
         time.sleep(lightsDurationEW)
         GPIO.output(GREEN_EW,GPIO.LOW)
         GPIO.output(RED_NS,GPIO.LOW)
-        print('Yellow 1')
+        print('EW: Yellow')
         GPIO.output(YELLOW_EW,GPIO.HIGH)
-        print('Yellow 2')
+        print('NS: Yellow')
         GPIO.output(YELLOW_NS,GPIO.HIGH)
         time.sleep(1)
         GPIO.output(YELLOW_EW,GPIO.LOW)
         GPIO.output(YELLOW_NS,GPIO.LOW)
-        print('Red 1')
+        print('EW: Red')
+        currentLightEW = 'Red'
         GPIO.output(RED_EW,GPIO.HIGH)
-        print('Green 2')
+        print('NS: Green')
+        currentLightNS = 'Green'
         GPIO.output(GREEN_NS,GPIO.HIGH)
         time.sleep(lightsDurationNS)
         GPIO.output(RED_EW,GPIO.LOW)
         GPIO.output(GREEN_NS,GPIO.LOW)
-        print('Yellow 1')
+        print('EW: Yellow')
+        print('NS: Yellow')
         GPIO.output(YELLOW_EW,GPIO.HIGH)
         GPIO.output(YELLOW_NS,GPIO.HIGH)
         time.sleep(1)
@@ -117,42 +146,43 @@ def EWSensor():
     global carCountEW
     global carPassingEW 
     global carPassingTimeEW
+    global currentLightEW
     carPassingEW = False
 
     while True:
-
-        GPIO.output(TRIGGER_EW, False)
-        time.sleep(0.05)
-    
-    #generate 10us pulse
-        GPIO.output(TRIGGER_EW, True)
-        time.sleep(0.00001)
-        GPIO.output(TRIGGER_EW, False)
-    
-    #measure how long it takes to read it in echo pin
-        while GPIO.input(ECHO_EW)==0:
-            pulseStart = time.time()
-    
-        while GPIO.input(ECHO_EW)==1:
-            pulseEnd = time.time()
-    
-        pulseDuration = pulseEnd - pulseStart
-        distance = pulseDuration * 17150
-        distance = round(distance, 2)
+        if(currentLightEW == 'Green'):
+            GPIO.output(TRIGGER_EW, False)
+            time.sleep(0.05)
         
-    #measure how long it takes a car to pass to get an approximate idea of the speed 
-        if(distance < 20 and carPassingEW == False):
-            print("EW: Car passing")
-            carPassingEW = True
-            start = time.time()
-        else:
-            if(distance > 20 and carPassingEW == True):
-                carPassingEW = False
-                end = time.time()
-                timeTaken = end - start
-                print("EW: Car passed. Time taken: " + str(timeTaken))
-                carCountEW = carCountEW + 1
-                carPassingTimeEW = carPassingTimeEW + timeTaken
+        #generate 10us pulse
+            GPIO.output(TRIGGER_EW, True)
+            time.sleep(0.00001)
+            GPIO.output(TRIGGER_EW, False)
+        
+        #measure how long it takes to read it in echo pin
+            while GPIO.input(ECHO_EW)==0:
+                pulseStart = time.time()
+        
+            while GPIO.input(ECHO_EW)==1:
+                pulseEnd = time.time()
+        
+            pulseDuration = pulseEnd - pulseStart
+            distance = pulseDuration * 17150
+            distance = round(distance, 2)
+            
+        #measure how long it takes a car to pass to get an approximate idea of the speed 
+            if(distance < 20 and carPassingEW == False):
+                print("EW: Car passing")
+                carPassingEW = True
+                start = time.time()
+            else:
+                if(distance > 20 and carPassingEW == True):
+                    carPassingEW = False
+                    end = time.time()
+                    timeTaken = end - start
+                    print("EW: Car passed. Time taken: " + str(timeTaken))
+                    carCountEW = carCountEW + 1
+                    carPassingTimeEW = carPassingTimeEW + timeTaken
 
 def WESensor():
     global carCountWE
@@ -199,42 +229,43 @@ def NSSensor():
     global carCountNS
     global carPassingNS
     global carPassingTimeNS
+    global currentLightNS
     carPassingNS = False
 
     while True:
-
-        GPIO.output(TRIGGER_NS, False)
-        time.sleep(0.1)
-    
-    #generate 10us pulse
-        GPIO.output(TRIGGER_NS, True)
-        time.sleep(0.00001)
-        GPIO.output(TRIGGER_NS, False)
-    
-    #measure how long it takes to read it in echo pin
-        while GPIO.input(ECHO_NS)==0:
-            pulseStart = time.time()
-    
-        while GPIO.input(ECHO_NS)==1:
-            pulseEnd = time.time()
-    
-        pulseDuration = pulseEnd - pulseStart
-        distance = pulseDuration * 17150
-        distance = round(distance, 2)
+        if(currentLightNS == 'Green'):
+            GPIO.output(TRIGGER_NS, False)
+            time.sleep(0.1)
         
-        #measure how long it takes a car to pass to get an approximate idea of the speed 
-        if(distance < 20 and carPassingNS == False):
-            print("NS: Car passing")
-            carPassingNS = True
-            start = time.time()
-        else:
-            if(distance > 20 and carPassingNS == True):
-                carPassingNS = False
-                end = time.time()
-                timeTaken = end - start
-                print("NS: Car passed. Time taken: " + str(timeTaken))
-                carCountNS = carCountNS + 1
-                carPassingTimeNS = carPassingTimeNS + timeTaken
+        #generate 10us pulse
+            GPIO.output(TRIGGER_NS, True)
+            time.sleep(0.00001)
+            GPIO.output(TRIGGER_NS, False)
+        
+        #measure how long it takes to read it in echo pin
+            while GPIO.input(ECHO_NS)==0:
+                pulseStart = time.time()
+        
+            while GPIO.input(ECHO_NS)==1:
+                pulseEnd = time.time()
+        
+            pulseDuration = pulseEnd - pulseStart
+            distance = pulseDuration * 17150
+            distance = round(distance, 2)
+            
+            #measure how long it takes a car to pass to get an approximate idea of the speed 
+            if(distance < 20 and carPassingNS == False):
+                print("NS: Car passing")
+                carPassingNS = True
+                start = time.time()
+            else:
+                if(distance > 20 and carPassingNS == True):
+                    carPassingNS = False
+                    end = time.time()
+                    timeTaken = end - start
+                    print("NS: Car passed. Time taken: " + str(timeTaken))
+                    carCountNS = carCountNS + 1
+                    carPassingTimeNS = carPassingTimeNS + timeTaken
 
 def SNSensor():
     global carCountSN
@@ -311,7 +342,7 @@ sensor_thread.start()
 # sensor_thread = threading.Thread(target=SNSensor)
 # sensor_thread.start()
 
-postData_timer = RepeatTimer(10,postTrafficData)  
+postData_timer = RepeatTimer(POST_DATA_INTERVAL,postTrafficData)  
 postData_timer.start()
 
 while True:
